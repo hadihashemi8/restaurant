@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Link from "next/Link"
+import Link from 'next/link'
 import styles from "../../styles/Home.module.css"
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -10,7 +10,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import { SwipeableDrawer } from "@mui/material";
-
+// import logo from "../images/logo.png"
+import Image from 'next/image'
 
 
 const sideBarItems = [
@@ -38,6 +39,7 @@ export default function NavBar() {
     
         >
             <div className="w-20 h-20 mx-auto">
+              
                 <img src="/images/logo.png" alt="logo" />
             </div>
             <List className="pt-5">

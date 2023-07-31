@@ -2,6 +2,7 @@ import Button from "../Button/Button";
 import Title from "../Title/Title";
 
 
+
 export default function AboutUs() {
     return (
         <div className=" p-4 pt-20 flex items-center justify-center ">
