@@ -25,10 +25,10 @@ export default function Layout({ children }) {
                     <img className=" w-full absolute bottom-0 left-0 " src="/images/svg/wave-haikei.png" alt="wave" />
                 </div>
             </header>
-            <div className="container  mx-auto  mt-96 ">
+            <div className="container mx-auto">
                 {children}
             </div>
-            <footer></footer>
+            <footer className="mt-96">footer</footer>
         </div>
     )
 }

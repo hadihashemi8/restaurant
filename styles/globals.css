@@ -19,6 +19,7 @@
 
 body , .MuiTypography-root{
     font-family: vazir ;
+    color: var(--main-color1);
 }
 
 .menu-item:after {

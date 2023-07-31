@@ -37,11 +37,13 @@ export default function NavBar() {
             role="presentation"
     
         >
-            <h2 className="text-center mt-8">لوگو</h2>
+            <div className="w-20 h-20 mx-auto">
+                <img src="/images/logo.png" alt="logo" />
+            </div>
             <List className="pt-5">
                 {sideBarItems.map((item) => (
     
-                    <ListItem className="hover:bg-main-color2 text-main-color1 " key={item.id} disablePadding>
+                    <ListItem className="hover:bg-main-color4 text-main-color1 " key={item.id} disablePadding>
                         <ListItemButton >
                             <ListItemText className="text-right " primary={item.title} />
                         </ListItemButton>
