@@ -1,26 +1,39 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@font-face {
+    font-family: vazir;
+    src: url(../public/fonts/Vazir-Light.ttf);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+:root {
+    --main-color1: #025464;
+    --main-color2: #E57C23;
+    --main-color3: #E8AA42;
+    --main-color4: #F8F1F1;
+    
 }
 
-* {
-  box-sizing: border-box;
+body , .MuiTypography-root{
+    font-family: vazir ;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.menu-item:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 4px;
+    width: 0;
+    background-color: var(--main-color2);
+}
+
+.menu-item:hover::after {
+    width: 100%;
+    left: 0;
+    transition: all 0.4s;
+
 }
