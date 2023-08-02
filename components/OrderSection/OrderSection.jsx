@@ -7,7 +7,7 @@ export default function OrderSection() {
     return (
         <div className=" p-4 pt-20 flex items-center  justify-center">
             <div className=' w-full flex flex-col items-center relative'>
-                <Title title="بخش سفارش" theme2={true} />
+                <Title title="بخش سفارش" theme="bg-main-color1" />
                 <div className='flex items-center justify-center relative bg-[url(/images/order-bg2.jpg)] bg-cover bg-center bg-fixed mt-10 h-96 w-full'>
 
                     <div className='w-full h-full  p-4 flex flex-col items-center justify-between  sm:flex-row '>

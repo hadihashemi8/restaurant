@@ -7,11 +7,10 @@ export default function AboutUs() {
     return (
         <div className=" p-4 pt-20 flex items-center justify-center ">
             <div className="flex flex-col items-center  px-5">
-                <Title title="درباره ما" />
+                <Title title="درباره ما" theme="bg-main-color1"/>
                 <div className=" flex flex-col md:flex-row md:items-center mt-10 ">
                     <div className="max-w-lg  relative">
                         <img className="bg-main-color4" src="/images/aboutUs-logo.png" alt="logo" />
-                        {/* <span className="absolute top-0 left-0 bg-red-500 h-2 w-2"></span> */}
                     </div>
                     <div className="flex items-center justify-center mt-4 sm:mt-0 ">
                         <div className="flex flex-col items-center lg:w-2/3">
