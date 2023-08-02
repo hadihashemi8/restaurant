@@ -9,7 +9,7 @@ export default function AboutUs() {
             <div className="flex flex-col items-center  px-5">
                 <Title title="درباره ما" />
                 <div className=" flex flex-col sm:flex-row sm:items-center mt-10 ">
-                    <div className="-400 max-w-md">
+                    <div className="max-w-md">
                         <img src="/images/logo.png" alt="logo" />
                     </div>
                     <div className="flex items-center justify-center mt-4 sm:mt-0 ">

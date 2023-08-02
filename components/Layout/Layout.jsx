@@ -2,6 +2,9 @@ import styles from "../../styles/Home.module.css"
 import Button from "../Button/Button"
 import NavBar from "../NavBar/NavBar"
 // import wave from "../../public/images/svg/wave-haikei.png"
+import Image from "next/image"
+
+
 
 export default function Layout({ children }) {
 
@@ -10,8 +13,9 @@ export default function Layout({ children }) {
         <div className="max-w-screen-2xl  min-h-screen mx-auto bg-main-color4 " dir="rtl">
             <header >
                 <NavBar />
-                <div className="bg-[url(/images/header-bg3.jpg)] p-4 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-3  bg-cover bg-center bg-no-repeat relative h-[600px]" >
-                    <div className=" p-2 flex items-center justify-center sm:items-start col-span-1 sm:col-start-2 sm:col-end-3 sm:row-start-2 sm:row-end-4  ">
+                <div className="p-4 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-3  relative h-[600px]" >
+                    <Image alt="bg" src="/images/header-bg3-min.jpg" loading="lazy" fill sizes="100vw" style={{ objectFit: "cover" }} />
+                    <div className="z-40 p-2 flex items-center justify-center sm:items-start col-span-1 sm:col-start-2 sm:col-end-3 sm:row-start-2 sm:row-end-4  ">
                         <div className="bg-[rgba(0,0,0,0.5)] py-5 px-2 flex flex-col items-center  justify-between">
                             <h1 className="text-3xl lg:text-5xl text-main-color4 font-extrabold drop-shadow-lg ">رستوران نمونه</h1>
                             <h2 className="mt-4 lg:mt-6 text-xl text-main-color4 text-center lg:text-3xl">هر زمان غذایی
