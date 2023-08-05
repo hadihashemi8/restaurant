@@ -11,7 +11,8 @@ module.exports = {
         "main-color1": "var(--main-color1)",
         "main-color2": "var(--main-color2)",
         "main-color3": "var(--main-color3)",
-        "main-color4": "var(--main-color4)"
+        "main-color4": "var(--main-color4)",
+        "main-color5": "var(--main-color5)",
       }
       
     },
