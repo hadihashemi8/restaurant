@@ -20,6 +20,7 @@ export default function AboutUs() {
                             <div className="mt-4 self-end">
                                 <Button title="تماس با ما" />
                             </div>
+                        <h2 className="text-2xl mt-5 self-start text-main-color5 w-52 text-justify  -rotate-12 ">غذای گرم و تازه را در هر ساعت از شبانه روز سفارش دهید</h2>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 
 
-export default function BuyBtn({title}) {
+export default function BuyBtn({title , color , textColor}) {
     return (
-        <button className="bg-main-color4 py-2 px-4 text-sm md:text-base cursor-pointer text-main-color1 rounded-xl">{title}</button>
+        <button className={` py-2 px-4 text-sm md:text-base cursor-pointer  rounded-xl ${color || "bg-main-color4"} ${textColor || "text-main-color1"}`}>{title}</button>
     )
 }

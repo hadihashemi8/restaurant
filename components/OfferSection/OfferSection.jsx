@@ -14,7 +14,7 @@ export default function OfferSection() {
                 <div className="flex items-center justify-center w-full">
                     <Title title="تخفیف های امروز" theme="bg-main-color5" />
                 </div>
-                <div className="w-full mt-14  rounded-xl h-96 ">
+                <div className="w-full mt-14  rounded-xl  ">
                     <Swiper
                         slidesPerView={1}
                         spaceBetween={20}
@@ -22,7 +22,7 @@ export default function OfferSection() {
                             clickable: true,
                         }}
                         autoplay={{
-                            delay: 2500,
+                            delay: 1500,
                             disableOnInteraction: false,
                           }}
                         breakpoints={{
@@ -37,7 +37,7 @@ export default function OfferSection() {
 
                         }}
                        loop={true}
-                        modules={[Autoplay]}
+                        modules={Autoplay}
                         className="mySwiper w-full h-full"
                     >
                         <SwiperSlide className="text-center flex items-center justify-center py-2 ">
@@ -55,8 +55,14 @@ export default function OfferSection() {
                         <SwiperSlide className="text-center flex items-center justify-center py-2 ">
                             <Card offerCard={true} />
                         </SwiperSlide>
-
-
+                        <SwiperSlide className="text-center flex items-center justify-center py-2 ">
+                            <Card offerCard={true} />
+                        </SwiperSlide>
+                        <SwiperSlide className="text-center flex items-center justify-center py-2 ">
+                            <Card offerCard={true} />
+                        </SwiperSlide>
+                    
+                
                     </Swiper>
                 </div>
             </div>

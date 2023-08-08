@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import Card from "../Card/Card";
+import Button from "../Button/Button";
 
 export default function TodayMenu() {
   return (
@@ -14,7 +15,8 @@ export default function TodayMenu() {
                 <div className="flex items-center justify-center w-full">
                     <Title title="منوی امروز" theme="bg-main-color2" />
                 </div>
-                <div className="w-full mt-14  rounded-xl h-96 bg-main-color4">
+                <div className="w-full mt-14  rounded-xl  bg-main-color4">
+
                     <Swiper
                         slidesPerView={1}
                         spaceBetween={20}
@@ -37,28 +39,34 @@ export default function TodayMenu() {
 
                         }}
                        loop={true}
-                        modules={[Autoplay]}
-                        className="mySwiper w-full h-full"
+                        modules={Autoplay}
+                        className="mySwiper w-full h-full "
                     >
-                        <SwiperSlide className="text-center flex items-center justify-center py-2 ">
+                        <SwiperSlide className="text-center flex items-center justify-center p-2 md:px-0 ">
                             <Card offerCard={false} />
                         </SwiperSlide>
-                        <SwiperSlide className="text-center flex items-center justify-center py-2 ">
+                        <SwiperSlide className="text-center flex items-center justify-center p-2 md:px-0 ">
                             <Card offerCard={false} />
                         </SwiperSlide>
-                        <SwiperSlide className="text-center flex items-center justify-center py-2 ">
+                        <SwiperSlide className="text-center flex items-center justify-center p-2 md:px-0 ">
                             <Card offerCard={false} />
                         </SwiperSlide>
-                        <SwiperSlide className="text-center flex items-center justify-center py-2 ">
+                        <SwiperSlide className="text-center flex items-center justify-center p-2 md:px-0 ">
                             <Card offerCard={false} />
                         </SwiperSlide>
-                        <SwiperSlide className="text-center flex items-center justify-center py-2 ">
+                        <SwiperSlide className="text-center flex items-center justify-center p-2 md:px-0 ">
                             <Card offerCard={false} />
                         </SwiperSlide>
+                   
 
 
                     </Swiper>
+
+                  
                 </div>
+                    <div className="mt-8">
+                    <Button title="مشاهده همه"/>
+                    </div>
             </div>
         </div>
   )
