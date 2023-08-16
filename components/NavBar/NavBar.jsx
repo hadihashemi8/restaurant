@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -9,7 +9,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import { SwipeableDrawer } from "@mui/material";
-
+import Cookies from "js-cookie"
 
 
 import Avatar from '@mui/material/Avatar';
@@ -22,6 +22,9 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { signOut, useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
+
 
 
 const sideBarItems = [
@@ -34,6 +37,7 @@ const sideBarItems = [
 
 export default function NavBar() {
 
+    const { status, data: session } = useSession()
     const [showSideBar, setShowSideBar] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -75,6 +79,30 @@ export default function NavBar() {
         </Box>
     );
 
+useEffect(() => {
+    console.log(session);
+} ,[session])
+
+    const logOutHandler = () => {
+        Swal.fire({
+            title: "میخواهید خارج شوید؟",
+            icon: "question",
+            showCancelButton: "true",
+            cancelButtonText: "لغو",
+            cancelButtonColor: "#EE4041",
+            confirmButtonText: "بله",
+            confirmButtonColor: "#025464",
+            reverseButtons: true
+        }).then(res => {
+            if (res.isConfirmed) {
+                Cookies.remove()
+
+                signOut({ callbackUrl: '/' })
+            }
+        })
+
+    }
+
 
 
     return (
@@ -88,10 +116,10 @@ export default function NavBar() {
                         منو غذا
                         <ArrowDropDownIcon className="rotate-180 group-hover:rotate-0 transition-all duration-300" />
                     </Link>
-                    <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="/">
+                    <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="#About-us">
                         درباره ما
                     </Link>
-                    <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="/">
+                    <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="#Contect-us">
                         تماس با ما
                     </Link>
                 </ul>
@@ -113,74 +141,86 @@ export default function NavBar() {
                     </>
                 )}
 
-                <div >
-                    <Link className="group  flex items-center justify-between  p-2 py-4 relative menu-item text-main-color4 w-[140px]  text-center" href="/Login">
-                        ورود / عضویت
-                        <ArrowDropDownIcon className="rotate-180 group-hover:rotate-0 transition-all duration-300" />
-                    </Link>
-                </div>
+
+                {status == "loading" ? "loading" : session?.user ? (
+                    <>
+                        <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+
+                            <IconButton
+                                onClick={handleClick}
+                                size="small"
+                                aria-controls={open ? 'account-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
+                            >
+                                <Avatar />
+                            </IconButton>
+
+                        </Box>
+                        <Menu
+                            anchorEl={anchorEl}
+                            id="account-menu"
+                            open={open}
+                            onClose={handleClose}
+                            onClick={handleClose}
+                            PaperProps={{
+                                elevation: 0,
+                                sx: {
+                                    overflow: 'visible',
+                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                    mt: 1.5,
+                                    '& .MuiAvatar-root': {
+                                        width: 32,
+                                        height: 'auto',
+                                        mr: -0.5,
+                                        ml: 1,
 
 
-                {/* <Box sx={{ display: 'flex', alignItems: 'center' ,textAlign: 'center' }}>
-                    
-                        <IconButton
-                            onClick={handleClick}
-                            size="small"
-                            aria-controls={open ? 'account-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
+                                    },
+                                    '&:before': {
+                                        content: '""',
+                                        display: 'block',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 14,
+                                        width: 10,
+                                        height: 10,
+                                        bgcolor: 'background.paper',
+                                        transform: 'translateY(-50%) rotate(45deg)',
+                                        zIndex: 0,
+                                    },
+                                },
+                            }}
+
                         >
-                           <Avatar/>
-                        </IconButton>
-                    
-                </Box>
-                <Menu
-                    anchorEl={anchorEl}
-                    id="account-menu"
-                    open={open}
-                    onClose={handleClose}
-                    onClick={handleClose}
-                    PaperProps={{
-                        elevation: 0,
-                        sx: {
-                            overflow: 'visible',
-                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                            mt: 1.5,
-                            '& .MuiAvatar-root': {
-                                width: 32,
-                                height: 'auto',
-                                mr: -0.5,
-                                ml: 1,
-                                
-                                
-                            },
-                            '&:before': {
-                                content: '""',
-                                display: 'block',
-                                position: 'absolute',
-                                top: 0,
-                                left: 14,
-                                width: 10,
-                                height: 10,
-                                bgcolor: 'background.paper',
-                                transform: 'translateY(-50%) rotate(45deg)',
-                                zIndex: 0,
-                            },
-                        },
-                    }}
-         
-                >
-                    <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1" onClick={handleClose}>
-                      
-                        هادی هاشمی
-                    </MenuItem>
-                   
-                    <Divider />
-                   
-                    <MenuItem className="flex items-center justify-start flex-row-reverse d-item text-main-color5" onClick={handleClose}>
-                        خروج
-                    </MenuItem>
-                </Menu> */}
+                            <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1" >
+                                {session.user.name}
+                            </MenuItem>
+                            {session.user.isAdmin && (
+                                <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1" >
+                                    پنل کاربری
+                                </MenuItem>
+                            )}
+
+                            <Divider />
+
+                            <MenuItem className="flex items-center justify-start flex-row-reverse d-item text-main-color5" onClick={logOutHandler}>
+                                خروج
+                            </MenuItem>
+                        </Menu>
+                    </>
+                ) : (
+                    <div >
+                        <Link className="group flex items-center justify-between  p-2 py-4 relative menu-item text-main-color4 w-[140px]  text-center" href="/SignUp">
+                            ورود / عضویت
+                            <ArrowDropDownIcon className="rotate-180 group-hover:rotate-0 transition-all duration-300" />
+                        </Link>
+                    </div>
+                )}
+
+
+
+
 
             </div>
         </nav>

@@ -24,6 +24,10 @@ body,
     color: var(--main-color1);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .menu-item:after {
     content: "";
     position: absolute;
@@ -41,7 +45,23 @@ body,
 
 }
 
-.d-item{
+.d-item {
     font-family: vazir !important;
-    
+
 }
+
+.Toastify__toast-body {
+    font-family: vazir !important;
+
+}
+
+.swal2-title {
+    font-size: 20px;
+    color: var(--main-color1);
+}
+
+
+
+
+
+

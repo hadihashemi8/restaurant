@@ -5,7 +5,7 @@ import Title from "../Title/Title";
 
 export default function AboutUs() {
     return (
-        <div className=" p-4 pt-20 flex items-center justify-center ">
+        <div id="About-us" className=" p-4 mt-20 flex items-center justify-center ">
             <div className="flex flex-col items-center  px-5">
                 <Title title="درباره ما" theme="bg-main-color1"/>
                 <div className=" flex flex-col md:flex-row items-center mt-10 ">
@@ -18,7 +18,7 @@ export default function AboutUs() {
                             <p className="text-justify mt-4">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
                             <p className="text-justify mt-4">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
                             <div className="mt-4 self-end">
-                                <Button title="تماس با ما" />
+                                <Button title="تماس با ما" to="#Contect-us"/>
                             </div>
                         <h2 className="text-2xl mt-5 self-start text-main-color5 w-52 text-justify  -rotate-12 ">غذای گرم و تازه را در هر ساعت از شبانه روز سفارش دهید</h2>
                         </div>

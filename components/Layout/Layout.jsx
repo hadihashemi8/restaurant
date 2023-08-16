@@ -26,11 +26,11 @@ export default function Layout({ children }) {
                             <h2 className="mt-4 lg:mt-6 text-xl text-main-color4 text-center lg:text-3xl">هر زمان غذایی
                                 سالم و تازه سفارش دهید</h2>
                             <div className="flex mt-4 lg:mt-6">
-                                <Button title=" سفارش دهید " />
+                                <Button title=" سفارش دهید " to="#Order-section" />
                             </div>
                         </div>
                     </div>
-                    <img className=" w-full absolute bottom-0 left-0 " src="/images/svg/wave-haikei.png" alt="wave" />
+                    <img className=" w-full absolute -bottom-1 left-0 " src="/images/svg/wave-haikei.png" alt="wave" />
                 </div>
             </header>
             <div className="container mx-auto">

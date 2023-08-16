@@ -6,7 +6,7 @@ import BuyBtn from '../BuyBtn/BuyBtn'
 
 export default function OrderSection() {
     return (
-        <div className=" p-4 pt-20 flex items-center  justify-center">
+        <div id="Order-section" className=" p-4 mt-20 flex items-center  justify-center">
             <div className=' w-full flex flex-col items-center relative'>
                 <Title title="بخش سفارش" theme="bg-main-color1" />
                 <div className='flex items-center justify-center relative bg-[url(/images/order-bg2.jpg)] bg-cover bg-center bg-fixed mt-14 h-96 w-full'>

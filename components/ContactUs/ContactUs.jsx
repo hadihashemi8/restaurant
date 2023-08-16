@@ -13,7 +13,7 @@ export default function ContactUs() {
 
 
     return (
-        <div className=" p-4 pt-20 flex items-center justify-center ">
+        <div id="Contect-us" className=" p-4 mt-20 flex items-center justify-center ">
             <div className="flex flex-col items-center  px-5">
                 <Title title="تماس با ما" theme="bg-main-color1" />
                 <div className=" flex flex-col md:flex-row items-center mt-10 ">
