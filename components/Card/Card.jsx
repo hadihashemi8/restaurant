@@ -25,7 +25,7 @@ export default function Card({ offerCard }) {
     return (
         <div className={`w-full h-full p-2 group cursor-default rounded-xl max-w-sm mx-auto relative flex items-start flex-col ${offerCard ? "bg-main-color5" : "bg-main-color4 border-[1px] border-gray-400 text-main-color1 shadow-[0_0_5px_rgba(0,0,0,0.4)]"}`}>
             <div className="w-full h-60 bg-red-100  relative rounded-xl overflow-hidden ">
-                <Image className="group-hover:scale-110 duration-300 " loading="lazy" src="/images/foods/food-1.jpg" alt="food-img" fill sizes="100%" style={{objectFit:"cover" , backgroundAttachment:"fixed"}} />
+                <Image className="group-hover:scale-110 duration-300 " loading="lazy" src="/images/foods/food-1.jpg" alt="food-img" fill sizes="100%" style={{objectFit:"cover" }} />
                 
             </div>
             <div className=" flex flex-col items-start w-full text-res-600">
@@ -42,7 +42,7 @@ export default function Card({ offerCard }) {
                 </div>
                 <div className="w-full flex items-center justify-between mt-3">
                     <p className={`text-sm ${offerCard ? "text-main-color4" : "text-main-color1"}`}>یکم توضیحات از غذا</p>
-                    <div className="hover:-translate-y-1 duration-300">
+                    <div >
                         <BuyBtn title="سفارش غذا" color={offerCard ? "bg-main-color4" : "bg-main-color5"} textColor={offerCard ? "text-main-color1" : "text-main-color4"} />
                     </div>
                 </div>

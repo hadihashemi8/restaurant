@@ -24,7 +24,9 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { signOut, useSession } from 'next-auth/react';
 import Swal from 'sweetalert2';
-
+import Title from "../Title/Title"
+import QuieckMenu from '../QuieckMenu/QuieckMenu';
+import Button from '../Button/Button';
 
 
 const sideBarItems = [
@@ -79,9 +81,9 @@ export default function NavBar() {
         </Box>
     );
 
-useEffect(() => {
-    console.log(session);
-} ,[session])
+    useEffect(() => {
+        console.log(session);
+    }, [session])
 
     const logOutHandler = () => {
         Swal.fire({
@@ -112,9 +114,17 @@ useEffect(() => {
                     <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="/">
                         خانه
                     </Link>
-                    <Link className="group  ml-4 p-2 py-4 flex items-center justify-around relative menu-item text-main-color4 w-[120px]  text-center" href="/">
-                        منو غذا
+                    <Link className="group   ml-4 p-2 py-4 flex items-center justify-around relative menu-item text-main-color4 w-[120px]  text-center" href="/">
+                        منوی سریع
                         <ArrowDropDownIcon className="rotate-180 group-hover:rotate-0 transition-all duration-300" />
+                        <div className='w-[1000px] h-0 group-hover:h-auto duration-500 bg-main-color4 absolute top-full -right-full z-40 overflow-hidden group-hover:p-4 flex flex-col items-center'>
+                            <Title title="منوی سریع" theme="bg-main-color1" />
+
+                            <QuieckMenu />
+                            
+                            <Button title="مشاهده بیشتر"/>
+
+                        </div>
                     </Link>
                     <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="#About-us">
                         درباره ما

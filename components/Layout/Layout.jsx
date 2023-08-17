@@ -21,7 +21,7 @@ export default function Layout({ children }) {
                 <NavBar />
                 <div className="p-4 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-4  relative h-[600px]" >
                     <Image alt="bg" src="/images/header-bg3-min.jpg" loading="eager" fill sizes="100vw" style={{ objectFit: "cover" }} />
-                    <div className="z-40 p-2 flex items-center justify-center  col-span-1 sm:col-start-2 sm:col-end-3 sm:row-start-2 sm:row-end-4   ">
+                    <div className="z-30 p-2 flex items-center justify-center  col-span-1 sm:col-start-2 sm:col-end-3 sm:row-start-2 sm:row-end-4   ">
                         <div className="bg-[rgba(0,0,0,0.5)] py-5 px-2 flex flex-col items-center  justify-between">
                             <h1 className="text-3xl lg:text-5xl text-main-color4 font-extrabold drop-shadow-lg ">رستوران نمونه</h1>
                             <h2 className="mt-4 lg:mt-6 text-xl text-main-color4 text-center lg:text-3xl">هر زمان غذایی
@@ -41,7 +41,7 @@ export default function Layout({ children }) {
             <footer className=" pt-20 flex flex-col items-center justify-center ">
                 <div className="w-full pt-24  bg-main-color1 relative flex flex-col items-center" >
                     <img className=" w-full absolute -top-1 left-0 rotate-180" src="/images/svg/wave-haikei.png" alt="wave" />
-                    <img className="w-52  md:hidden" src="/images/logo.png" alt="" />
+                    <img className="w-52  md:hidden" src="/images/logo.png" alt="logo" />
 
                     <div className="grid gap-4 w-full p-4 lg:px-14 mt-4  grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
 
