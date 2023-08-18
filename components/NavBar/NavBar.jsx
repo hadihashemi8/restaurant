@@ -122,7 +122,7 @@ export default function NavBar() {
 
                             <QuieckMenu />
                             
-                            <Button title="مشاهده بیشتر"/>
+                            <Button title="مشاهده بیشتر" to="/FoodsMenue"/>
 
                         </div>
                     </Link>

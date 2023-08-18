@@ -13,6 +13,9 @@ module.exports = {
         "main-color3": "var(--main-color3)",
         "main-color4": "var(--main-color4)",
         "main-color5": "var(--main-color5)",
+      },
+      fontFamily:{
+        "main-font":"var(--main-font)"
       }
       
     },

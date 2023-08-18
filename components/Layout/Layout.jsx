@@ -1,15 +1,16 @@
 import Link from "next/link"
 import styles from "../../styles/Home.module.css"
 import Button from "../Button/Button"
-import NavBar from "../NavBar/NavBar"
+
 // import wave from "../../public/images/svg/wave-haikei.png"
 import Image from "next/image"
 import PhoneIcon from '@mui/icons-material/Phone';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import dynamic from "next/dynamic"
 
-
+const NavBar = dynamic(() => import("../NavBar/NavBar"), { ssr: false })
 
 
 export default function Layout({ children }) {
@@ -27,11 +28,11 @@ export default function Layout({ children }) {
                             <h2 className="mt-4 lg:mt-6 text-xl text-main-color4 text-center lg:text-3xl">هر زمان غذایی
                                 سالم و تازه سفارش دهید</h2>
                             <div className="flex mt-4 lg:mt-6">
-                                <Button title=" سفارش دهید " to="#Order-section" />
+                                <Button title=" سفارش دهید " to="/#Order-section" />
                             </div>
                         </div>
                     </div>
-                   
+
                     <img className=" w-full absolute -bottom-1 left-0 " src="/images/svg/wave-haikei.png" alt="wave" />
                 </div>
             </header>

@@ -65,7 +65,7 @@ export default function TodayMenu() {
                   
                 </div>
                     <div className="mt-8">
-                    <Button title="مشاهده همه"/>
+                    <Button title="مشاهده همه" to="/FoodsMenue"/>
                     </div>
             </div>
         </div>

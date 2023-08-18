@@ -3,7 +3,7 @@ import AuthLayout from '../components/AuthLayout/AuthLayout'
 import Title from '../components/Title/Title';
 import { useRouter } from "next/router"
 import { useFormik } from 'formik';
-import { signIn } from "next-auth/react"
+import { getSession, signIn } from "next-auth/react"
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import * as Yup from "yup"
@@ -28,7 +28,7 @@ export default function SignIn() {
                 callbackUrl: '/'
             })
 
-            console.log(result);
+            
 
             if (result.ok) {
                 Swal.fire({
@@ -111,4 +111,26 @@ export default function SignIn() {
             </div>
         </AuthLayout>
     )
+}
+
+
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req })
+
+   
+
+    if (session) {
+        return {
+            redirect: {
+                destination: "/",
+                premanent:false
+            }
+
+        }
+    }
+
+
+    return {
+        props: {}
+    }
 }

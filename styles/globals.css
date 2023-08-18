@@ -15,13 +15,14 @@
     --main-color3: #E8AA42;
     --main-color4: #F8F1F1;
     --main-color5: #EE4041;
-
+   
 }
 
 body,
 .MuiTypography-root {
     font-family: vazir !important;
     color: var(--main-color1);
+
 }
 
 html {
@@ -45,12 +46,7 @@ html {
 
 }
 
-.d-item {
-    font-family: vazir !important;
-
-}
-
-.Toastify__toast-body {
+.d-item , .chip , .Toastify__toast-body {
     font-family: vazir !important;
 
 }
@@ -59,9 +55,3 @@ html {
     font-size: 20px;
     color: var(--main-color1);
 }
-
-
-
-
-
-

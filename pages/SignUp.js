@@ -7,13 +7,16 @@ import * as Yup from "yup"
 import { useRouter } from "next/router"
 import { toast } from 'react-toastify';
 import Swal from "sweetalert2"
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/dist/server/api-utils';
 
 
 
-export default function SignUp() {
+export default function SignUp(props) {
 
-    const { data: session } = useSession()
+    const { status, data: session } = useSession()
+    const [loading, setLoading] = useState(true)
     const [formError, setFormError] = useState('')
     const router = useRouter()
     const formik = useFormik({
@@ -70,16 +73,16 @@ export default function SignUp() {
                     Swal.fire({
                         title: "ثبت نام با موفقیت انجام شد",
                         icon: "success",
-                        confirmButtonText:"ورود",
-                        confirmButtonColor:"#025464"
+                        confirmButtonText: "ورود",
+                        confirmButtonColor: "#025464"
                     })
-                    .then(res => {
-                        if(res.isConfirmed || res.isDismissed){    
-                            router.push("SignIn")
-                        }
-                    })
+                        .then(res => {
+                            if (res.isConfirmed || res.isDismissed) {
+                                router.push("SignIn")
+                            }
+                        })
 
-                    
+
 
                 }
 
@@ -91,11 +94,11 @@ export default function SignUp() {
 
 
     useEffect(() => {
-      
-        if (session?.user) {
-            router.push(router.query.redirect || "/")
+        if (status == "authenticated") {
+            router.push("/")
         }
-    }, [session , router])
+
+    }, [session, status])
 
 
 
@@ -196,4 +199,28 @@ export default function SignUp() {
             </div>
         </AuthLayout>
     )
+
+
+
+}
+
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req })
+
+    console.log(session);
+
+    if (session) {
+        return {
+            redirect: {
+                destination: "/",
+                premanent:false
+            }
+
+        }
+    }
+
+
+    return {
+        props: {}
+    }
 }
