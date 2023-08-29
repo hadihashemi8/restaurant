@@ -16,7 +16,6 @@ import { redirect } from 'next/dist/server/api-utils';
 export default function SignUp(props) {
 
     const { status, data: session } = useSession()
-    const [loading, setLoading] = useState(true)
     const [formError, setFormError] = useState('')
     const router = useRouter()
     const formik = useFormik({
@@ -52,7 +51,7 @@ export default function SignUp(props) {
             }
 
 
-            fetch('http://localhost:3000/api/users', {
+            fetch('/api/users', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -207,7 +206,7 @@ export default function SignUp(props) {
 export async function getServerSideProps({ req }) {
     const session = await getSession({ req })
 
-    console.log(session);
+  
 
     if (session) {
         return {

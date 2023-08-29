@@ -46,7 +46,7 @@ html {
 
 }
 
-.d-item , .chip , .Toastify__toast-body {
+.d-item , .chip , .Toastify__toast-body , .upload-pic  ,.table-thead , .r-b ,.MuiTableCell-root {
     font-family: vazir !important;
 
 }
@@ -55,3 +55,8 @@ html {
     font-size: 20px;
     color: var(--main-color1);
 }
+
+/* .active-dashboard-link{
+    color: var(--main-color4) !important;
+    background-color: var(--main-color1) !important;
+} */

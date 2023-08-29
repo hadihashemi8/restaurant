@@ -1,6 +1,8 @@
 
 import { useEffect, useState } from "react";
 import Title from "../Title/Title";
+import Image from "next/image"
+
 
 
 export default function ContactUs() {
@@ -17,8 +19,8 @@ export default function ContactUs() {
             <div className="flex flex-col items-center  px-5">
                 <Title title="تماس با ما" theme="bg-main-color1" />
                 <div className=" flex flex-col md:flex-row items-center mt-10 ">
-                    <div className=" md:w-1/2 relative ">
-                        <img className="bg-main-color4" src="/images/contact-us.png" alt="logo" />
+                    <div className=" md:w-1/2 relative flex items-center justify-center ">
+                        <Image width={500} height={500} className="bg-main-color4" src="/images/contact-us.png" alt="logo" />
                     </div>
                     <div className="flex items-center md:w-1/2  justify-center mt-4 sm:mt-0 ">
                         <div className="flex flex-col items-center lg:w-3/4">

@@ -8,7 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
-import { SwipeableDrawer } from "@mui/material";
+import { Drawer, SwipeableDrawer } from "@mui/material";
 import Cookies from "js-cookie"
 
 
@@ -114,18 +114,21 @@ export default function NavBar() {
                     <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="/">
                         خانه
                     </Link>
-                    <Link className="group   ml-4 p-2 py-4 flex items-center justify-around relative menu-item text-main-color4 w-[120px]  text-center" href="/">
+                    <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="/FoodsMenue">
+                        منوی غذا
+                    </Link>
+                    {/* <Link className="group   ml-4 p-2 py-4 flex items-center justify-around relative menu-item text-main-color4 w-[120px]  text-center" href="/">
                         منوی سریع
                         <ArrowDropDownIcon className="rotate-180 group-hover:rotate-0 transition-all duration-300" />
                         <div className='w-[1000px] h-0 group-hover:h-auto duration-500 bg-main-color4 absolute top-full -right-full z-40 overflow-hidden group-hover:p-4 flex flex-col items-center'>
                             <Title title="منوی سریع" theme="bg-main-color1" />
 
                             <QuieckMenu />
-                            
-                            <Button title="مشاهده بیشتر" to="/FoodsMenue"/>
+
+                            <Button title="مشاهده بیشتر" to="/FoodsMenue" />
 
                         </div>
-                    </Link>
+                    </Link> */}
                     <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="#About-us">
                         درباره ما
                     </Link>
@@ -134,22 +137,23 @@ export default function NavBar() {
                     </Link>
                 </ul>
 
-                <button className="flex lg:hidden text-main-color4 " onClick={() => toggleDrawer(true)}>
-                    <MenuIcon className="text-3xl" />
-                </button>
-                {showSideBar && (
-                    <>
-                        <SwipeableDrawer
 
-                            anchor="right"
-                            open={showSideBar}
-                            onClose={() => toggleDrawer(false)}
-
-                        >
-                            {list()}
-                        </SwipeableDrawer>
-                    </>
-                )}
+                <div>
+                    {
+                        <>
+                            <button className="flex lg:hidden text-main-color4 " onClick={() => toggleDrawer(true)}>
+                                <MenuIcon className="text-3xl" />
+                            </button>
+                            <Drawer
+                                anchor="right"
+                                open={showSideBar}
+                                onClose={() => toggleDrawer( false)}
+                            >
+                                {list()}
+                            </Drawer>
+                        </>
+                    }
+                </div>
 
 
                 {status == "loading" ? "loading" : session?.user ? (
@@ -206,15 +210,16 @@ export default function NavBar() {
                             <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1" >
                                 {session.user.name}
                             </MenuItem>
-                            {session.user.isAdmin && (
-                                <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1" >
-                                    پنل کاربری
+                            <Divider />
+                            <Link href='/Dashboard/homepage'>
+                                <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1 mb-2" >
+                                    {session.user.isAdmin ? "پنل ادمین" : "پنل کاربری"}
                                 </MenuItem>
-                            )}
+                            </Link>
 
                             <Divider />
 
-                            <MenuItem className="flex items-center justify-start flex-row-reverse d-item text-main-color5" onClick={logOutHandler}>
+                            <MenuItem className="flex items-center justify-start flex-row-reverse d-item text-main-color5 mt-2" onClick={logOutHandler}>
                                 خروج
                             </MenuItem>
                         </Menu>

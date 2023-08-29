@@ -5,6 +5,7 @@ import OrderSection from "../components/OrderSection/OrderSection";
 import TodayMenu from "../components/TodayMenu/TodayMenu";
 import Categories from "../components/Categories/Categories";
 import ContactUs from "../components/ContactUs/ContactUs";
+import { useEffect } from "react";
 
 
 export default function Home() {

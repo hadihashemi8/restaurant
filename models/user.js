@@ -5,7 +5,7 @@ const newSchema = new mongoose.Schema({
     fullName: { type: String, required: true },
     phoneNumber: { type: Number, required: true },
     password: { type: String, required: true },
-    isAdmin: { type: Boolean, required: true, default: false },
+    isAdmin: { type: mongoose.Schema.Types.Mixed , required: true, default: false },
 }, { timestamps: true })
 
 

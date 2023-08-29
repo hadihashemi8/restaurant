@@ -33,10 +33,7 @@ export default function FoodsMenue() {
         console.info('You clicked the delete icon.');
     };
 
-
-
     const handleChange = (event, newValue) => {
-        console.log(value);
         setValue(newValue);
     };
 
@@ -132,7 +129,7 @@ export default function FoodsMenue() {
                             </button>
                         </div>
 
-                        <div className='w-full h-full p-4 gap-4   grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
+                        <div className='w-full h-full p-2 gap-2   grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
                             <div className='col-span-1'>
                                 <Card />
                             </div>

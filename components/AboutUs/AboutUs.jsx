@@ -1,6 +1,6 @@
 import Button from "../Button/Button";
 import Title from "../Title/Title";
-
+import Image from "next/image"
 
 
 export default function AboutUs() {
@@ -9,8 +9,9 @@ export default function AboutUs() {
             <div className="flex flex-col items-center  px-5">
                 <Title title="درباره ما" theme="bg-main-color1"/>
                 <div className=" flex flex-col md:flex-row items-center mt-10 ">
-                    <div className=" md:w-1/2 relative ">
-                        <img className="bg-main-color4" src="/images/aboutUs-logo.png" alt="logo" />
+                    <div className=" md:w-1/2 relative  flex items-center justify-center">
+                        
+                        <Image className="bg-main-color4" src="/images/aboutUs-logo.png" alt="logo" width={500} height={500} />
                     </div>
                     <div className="flex items-center md:w-1/2  justify-center mt-4 sm:mt-0 ">
                         <div className="flex flex-col items-center lg:w-2/3">
