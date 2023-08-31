@@ -14,6 +14,8 @@ export default async function handler(req, res) {
     await db.connect()
 
 
+    const { offset } = req.query
+
     if (req.method == "POST") {
 
         const form = formidable({ multiples: false });
@@ -60,12 +62,41 @@ export default async function handler(req, res) {
 
 
     } else if (req.method == "GET") {
+
+
+
+
+
         await Product.find()
             .then(products => {
                 if (products) {
-                    res.status(201).json({ status: true, data:products })
+
+                    if (offset) {
+
+                        const endSlice = offset
+                        const startSlice = endSlice - 10                  
+
+console.log(startSlice , endSlice);
+
+                        const sliceProducts = products.slice(startSlice , endSlice)
+
+                            res.status(201).json({ status: true, data: sliceProducts })
+                    } else {
+                        res.status(201).json({ status: true, data: products })
+                    }
 
                 }
-            }).catch(err => res.status(404).join({ err }))
+            }).catch(err => console.log(err))
+
+        // else {
+
+        //     await Product.find()
+        //         .then(products => {
+        //             if (products) {
+        //                 res.status(201).json({ status: true, data: products })
+
+        //             }
+        //         }).catch(err => res.status(404).join({ err }))
+        // }
     }
 }

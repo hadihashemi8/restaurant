@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout/Layout'
 import TuneIcon from '@mui/icons-material/Tune';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -18,23 +18,187 @@ import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { filterProducts } from '../../redux/slices/filterSlice';
+
+import InfiniteScroll from "react-infinite-scroll-component";
+import axios from "axios";
+import Loader from '../../components/Loader/Loader';
+
+
 
 
 function valuetext(value) {
     return `${value}°C`;
 }
 
+
+
+
 export default function FoodsMenue() {
 
-    const [showFilterSection, setShowFilterSection] = useState(false)
-    const [value, setValue] = React.useState([0, 200000]);
+    // infinite scroll data
+    const [items, setItems] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+    const [index, setIndex] = useState(2);
 
-    const handleDelete = () => {
-        console.info('You clicked the delete icon.');
+    // redux section
+    const selector = useSelector(state => state.filterItems)
+    const dispatch = useDispatch()
+
+    const [products, setProducts] = useState([])
+
+    const [filterOptionItems, setFilterOptionItems] = useState([
+        { id: 1, option: "همه", isChecked: true },
+        { id: 2, option: "همبرگر", isChecked: true },
+        { id: 3, option: "پیتزا", isChecked: true },
+        { id: 4, option: "کباب", isChecked: true },
+        { id: 5, option: "دسر", isChecked: true },
+        { id: 6, option: "مرغ", isChecked: true },
+        { id: 7, option: "پاستا", isChecked: true },
+        { id: 8, option: "نوشیدنی", isChecked: true },
+    ])
+    const [filterOptionChips, setFilterOptionChips] = useState(["همه"])
+
+    const [showFilterSection, setShowFilterSection] = useState(false)
+    const [value, setValue] = useState([0, 200000]);
+
+
+
+    const handleDelete = (item) => () => {
+        setFilterOptionChips(prev => prev.filter(option => option !== item))
+
+        const itemIndex = filterOptionItems.find(optionItem => optionItem.option == item)
+
+
+        let newItems = []
+
+        if (itemIndex.option == "همه") {
+            newItems = filterOptionItems.map(item => {
+                item.isChecked = false
+
+
+                return item
+            })
+        } else {
+            newItems = filterOptionItems.map(item => {
+                if (item.id == itemIndex.id) {
+                    item.isChecked = false
+                }
+
+                return item
+            })
+
+        }
+
+
+        const newFilterChips = filterOptionItems.filter(item => item.isChecked).map(item => item.option)
+
+
+        setFilterOptionChips(newFilterChips)
+        setFilterOptionItems(newItems)
     };
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+
+    const changeHandle = (e) => {
+
+        const filterOption = e.target.value
+
+        const findItem = filterOptionItems.find(item => item.option == filterOption)
+
+        if (filterOption == "همه" && !findItem.isChecked) {
+            const newItems = filterOptionItems.map(item => {
+                item.isChecked = true
+
+
+                return item
+            })
+
+            setFilterOptionChips(["همه"])
+
+            setFilterOptionItems(newItems)
+        } else if (filterOption == "همه" && findItem.isChecked) {
+            const newItems = filterOptionItems.map(item => {
+                item.isChecked = false
+
+                return item
+            })
+
+            const newFilterChips = filterOptionItems.filter(item => item.isChecked).map(item => item.option)
+
+            setFilterOptionChips(newFilterChips)
+            setFilterOptionItems(newItems)
+
+        } else {
+
+            const newItems = filterOptionItems.map(item => {
+                if (item.option == findItem.option) {
+                    item.isChecked = !item.isChecked
+                }
+                if (item.option == "همه") {
+                    item.isChecked = false
+                }
+
+
+                return item
+            })
+
+
+            // add and remove items from chips
+
+            const newFilterChips = filterOptionItems.filter(item => item.isChecked).map(item => item.option)
+
+
+            setFilterOptionChips(newFilterChips)
+            setFilterOptionItems(newItems)
+
+        }
+
+
+    }
+
+
+    useEffect(() => {
+        setProducts(selector.filtredItems)
+
+    }, [selector])
+
+    useEffect(() => {
+        console.log(items);
+        dispatch(filterProducts({ filterOptionChips, items }))
+    }, [items])
+
+
+    const filterHandler = () => {
+        dispatch(filterProducts({ filterOptionChips, items }))
+    }
+
+
+
+    // infinite scroll section
+    useEffect(() => {
+        axios.get("/api/product?offset=10&limit=12")
+            .then((res) => setItems(res.data.data))
+            .catch((err) => console.log(err));
+    }, []);
+
+    const fetchMoreData = () => {
+        axios
+            .get(`/api/product?offset=${index}0&limit=12`)
+            .then((res) => {
+
+                setItems((prevItems) => [...prevItems, ...res.data.data]);
+
+                res.data.data.length > 0 ? setHasMore(true) : setHasMore(false);
+            })
+            .catch((err) => console.log(err));
+
+        setIndex((prevIndex) => prevIndex + 1);
     };
 
 
@@ -48,7 +212,7 @@ export default function FoodsMenue() {
 
                     <div className={`bg-main-color4 lg:col-span-1 lg:relative  absolute top-0  w-full h-full duration-300 flex flex-col items-center z-30 p-4 border-l-[1px] border-gray-300 ${showFilterSection ? "right-0 block" : "-right-full lg:right-0 hidden lg:block"}`}>
                         <div className='flex items-center justify-center p-2 lg:hidden'>
-                            <button className='flex items-center justify-center bg-main-color1 text-main-color4 py-1 px-3 rounded-xl' onClick={() => setShowFilterSection(false)}>
+                            <button className='flex items-center justify-center bg-main-color1 text-main-color4 py-2 px-5 rounded-xl text-xl' onClick={() => setShowFilterSection(false)}>
                                 <CancelIcon />
                             </button>
 
@@ -56,14 +220,9 @@ export default function FoodsMenue() {
 
                         <div className=' w-full sticky top-0 left-0 p-2 flex flex-col items-center'>
                             <Stack className='w-full bg-white p-4 flex flex-wrap items-start justify-center gap-2 rounded-md' direction="row" >
-
-                                <Chip className='flex items-center flex-row-reverse  chip' label="پیتزا" onDelete={handleDelete} />
-                                <Chip className='flex items-center flex-row-reverse  chip' label="پیتزا" onDelete={handleDelete} />
-                                <Chip className='flex items-center flex-row-reverse  chip' label="پیتزا" onDelete={handleDelete} />
-                                <Chip className='flex items-center flex-row-reverse  chip' label="پیتزا" onDelete={handleDelete} />
-                                <Chip className='flex items-center flex-row-reverse  chip' label="پیتزا" onDelete={handleDelete} />
-                                <Chip className='flex items-center flex-row-reverse  chip' label="پیتزا" onDelete={handleDelete} />
-
+                                {filterOptionChips.length > 0 ? (filterOptionChips.map(item =>
+                                    <Chip key={item.id} className='flex items-center flex-row-reverse  chip' label={item} onDelete={handleDelete(item)} />
+                                )) : <p>هیچ فیلتری انتخاب نشده است</p>}
 
 
                             </Stack>
@@ -78,15 +237,10 @@ export default function FoodsMenue() {
                                     <Typography>دسته بندی</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails >
-                                    <FormGroup>
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="همه" />
-                                        <FormControlLabel control={<Checkbox />} label="پیتزا" />
-                                        <FormControlLabel control={<Checkbox />} label="همبرگر" />
-                                        <FormControlLabel control={<Checkbox />} label="مرغ" />
-                                        <FormControlLabel control={<Checkbox />} label="دسر" />
-                                        <FormControlLabel control={<Checkbox />} label="کباب" />
-                                        <FormControlLabel control={<Checkbox />} label="پاستا" />
-                                        <FormControlLabel control={<Checkbox />} label="نوشیدنی" />
+                                    <FormGroup onChange={changeHandle}>
+                                        {filterOptionItems.map(item => (
+                                            <FormControlLabel key={item.id} checked={item.isChecked} control={<Checkbox />} label={item.option} value={item.option} />
+                                        ))}
 
                                     </FormGroup>
                                 </AccordionDetails>
@@ -117,33 +271,34 @@ export default function FoodsMenue() {
                                 </AccordionDetails>
                             </Accordion>
 
-                            <button className='bg-main-color5 py-2 rounded-md w-full mt-4 text-main-color4'>اعمال فیلتر</button>
+                            <button onClick={filterHandler} className='bg-main-color5 py-2 rounded-md w-full mt-4 text-main-color4'>اعمال فیلتر</button>
                         </div>
                     </div>
 
-                    <div className=' col-span-1 lg:col-span-2 flex flex-col items-center relative'>
+                    <div className=' col-span-1 lg:col-span-2 flex flex-col  relative'>
                         <div className='flex items-center justify-center p-2 lg:hidden '>
-                            <button className='flex items-center justify-center bg-main-color1 text-main-color4 py-1 px-3 rounded-xl' onClick={() => setShowFilterSection(true)}>
+                            <button className='flex items-center justify-center bg-main-color1 text-main-color4 py-2 px-5 rounded-xl text-xl' onClick={() => setShowFilterSection(true)}>
                                 فیلتر
                                 <TuneIcon className='mr-1 ' />
                             </button>
                         </div>
 
-                        <div className='w-full h-full p-2 gap-2   grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
-                            <div className='col-span-1'>
-                                <Card />
+                        <InfiniteScroll
+                            dataLength={items.length}
+                            next={fetchMoreData}
+                            hasMore={hasMore}
+                            loader={<Loader />}
+                        >
+                            <div className='w-full  p-2 gap-2   grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
+                                {products?.map(item => (
+                                    <div key={item.id} className='col-span-1 '>
+                                        <Card offerCard={false} data={item} />
+                                    </div>
+                                ))}
+                                { }
                             </div>
-                            <div className='col-span-1'>
-                                <Card />
-                            </div>
-                            <div className='col-span-1'>
-                                <Card />
-                            </div>
-                            <div className='col-span-1'>
-                                <Card />
-                            </div>
+                        </InfiniteScroll>
 
-                        </div>
                     </div>
 
                 </div>

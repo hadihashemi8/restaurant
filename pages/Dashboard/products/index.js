@@ -20,6 +20,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import useFetch from '../../../hooks/useFetch';
 import { getSession } from 'next-auth/react';
+import Loader from '../../../components/Loader/Loader';
 
 
 
@@ -219,24 +220,19 @@ export default function Products() {
   }
 
 
-  useEffect(() => {
-    console.log(data);
-  }, [data])
-
-
 
   return (
     <DashboardLayout>
       <div className='w-full h-full grid grid-cols-1  gap-4'>
 
-        <div className=' col-span-1  p-4'>
+        <div className=' col-span-1  p-4 '>
           <div className='w-full flex flex-col md:flex-row-reverse items-center justify-center'>
             <div className='w-full md:flex-1'>
               <Title title="لیست منو" theme="bg-main-color5" />
             </div>
             <button onClick={() => setAddMenueOpen(true)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b md:self-start mt-8 md:mt-0'>افزودن به منو</button>
           </div>
-          {loading ? <p className='text-lg text-center mt-5 text-main-color1'>...درحال بارگذاری</p> : !loading && itemRows.length > 0 ?
+          {loading ? <div className='mt-40'> <Loader/></div> : !loading && itemRows.length > 0 ?
             <Paper dir="rtl" sx={{ width: '100%', overflow: 'hidden', marginTop: '24px' }}>
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
@@ -307,8 +303,6 @@ export default function Products() {
                 شما محصولی ندارید
               </h2>
             </div>}
-
-
 
         </div>
 

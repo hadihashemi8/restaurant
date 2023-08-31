@@ -17,16 +17,17 @@ export default async function handler(req, res) {
     const { pId } = req.query
 
 
+
     if (req.method == "DELETE") {
         await Product.findByIdAndDelete(pId)
 
         res.status(200).json({ msg: "product deleted..." })
     } else if (req.method == "PUT") {
 
-        
+
         const form = formidable({ multiples: true });
-        
-        
+
+
         const formData = await new Promise((resolve, reject) => {
             form.parse(req, async (err, fields, files) => {
                 if (err) {
@@ -38,7 +39,7 @@ export default async function handler(req, res) {
 
 
         const { fields, files } = await formData;
-       
+
 
         // const newObj = {
         //     name: fields?.name[0],

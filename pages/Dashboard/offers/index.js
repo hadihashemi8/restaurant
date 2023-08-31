@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import useFetch from '../../../hooks/useFetch';
 import Image from 'next/image';
 import { getSession } from 'next-auth/react';
+import Loader from '../../../components/Loader/Loader';
 
 
 
@@ -170,7 +171,7 @@ export default function Offers() {
         <div className='col-span-1 p-4'>
           <Title title="منوی تخفیف ها" theme="bg-main-color5" />
 
-          {loading ? <p className='text-lg text-center mt-5 text-main-color1'>...درحال بارگذاری</p> : !loading && itemRows.length > 0 ?
+          {loading ? <div className='mt-40'> <Loader/> </div> : !loading && itemRows.length > 0 ?
             <Paper dir="rtl" sx={{ width: '100%', overflow: 'hidden', marginTop: '24px' }}>
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
