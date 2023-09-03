@@ -14,6 +14,7 @@ export default function Home() {
   
   return (
     <Layout>
+    
       <Categories />
       <OfferSection />
       <AboutUs />

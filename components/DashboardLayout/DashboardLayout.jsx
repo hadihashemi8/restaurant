@@ -23,11 +23,16 @@ import { useSession } from 'next-auth/react';
 
 
 
-const menueItems = [
+const adminMenueItems = [
   { id: 1, title: "صفحه اصلی", to: "/Dashboard/homepage", icon: <HomeIcon /> },
   { id: 2, title: "محصولات", to: "/Dashboard/products", icon: <DashboardIcon /> },
   { id: 3, title: "کاربران", to: "/Dashboard/users", icon: <PeopleAltIcon /> },
   { id: 4, title: "تخفیف ها", to: "/Dashboard/offers", icon: <LocalOfferIcon /> },
+]
+
+const userMenueItems = [
+  { id: 1, title: "صفحه اصلی", to: "/Dashboard/homepage", icon: <HomeIcon /> },
+
 ]
 
 
@@ -67,11 +72,11 @@ export default function DashboardLayout({ children }) {
 
       <List >
 
-        {isAdmin && (
+        {isAdmin || isAdmin == "ADMIN" ? (
 
-          menueItems.map(item => (
+          adminMenueItems.map(item => (
             <Link key={item.id} href={item.to}>
-              <ListItem className={router.pathname === `${item.to}` ? "border-l-2 border-main-color1 text-main-color4" : ""} disablePadding>
+              <ListItem className={`border-4 border-transparent ${router.pathname === item.to ? " border-l-main-color1 text-main-color4" : ""}`} disablePadding>
                 <ListItemButton >
                   <ListItemIcon>
                     {item.icon}
@@ -83,7 +88,22 @@ export default function DashboardLayout({ children }) {
 
           ))
 
-        )}
+        ) : (
+
+          userMenueItems.map(item => (
+            <Link key={item.id} href={item.to}>
+            <ListItem className={`border-4 border-transparent ${router.pathname === item.to ? " border-l-main-color1 text-main-color4" : ""}`} disablePadding>
+                <ListItemButton >
+                  <ListItemIcon>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText className='text-end' primary={item.title} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+
+          )))}
+          
       </List>
       <Divider />
       <div className='text-center mt-2 '>
@@ -98,7 +118,7 @@ export default function DashboardLayout({ children }) {
 
   return (
     <>
-      <ToastContainer className="text-center font" />
+      <ToastContainer className="text-center font " />
 
       <div className="w-full min-h-screen max-w-screen-2xl mx-auto flex flex-col items-center justify-between">
 

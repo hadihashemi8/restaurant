@@ -109,7 +109,7 @@ export default function Offers() {
         offerPresent
       }
 
-      axios.put(`http://localhost:3000/api/offer/${productInfo._id}`, newObg)
+      axios.put(`/api/offer/${productInfo._id}`, newObg)
         .then(res => {
           if (res.status == 201) {
             setOfferMenueOpen(false)
@@ -143,7 +143,7 @@ export default function Offers() {
     }).then(res => {
       if (res.isConfirmed) {
 
-        axios.delete(`http://localhost:3000/api/offer/${rowId}`)
+        axios.delete(`/api/offer/${rowId}`)
           .then(res => {
             if (res.status == 201) {
               toast.success("تخفیف با موفقیت برداشته شد", {

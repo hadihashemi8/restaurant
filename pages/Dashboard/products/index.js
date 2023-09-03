@@ -208,7 +208,7 @@ export default function Products() {
 
     console.log(itemBol);
 
-    axios.put(`http://localhost:3000/api/product/addToOffer/${rowId}`, {
+    axios.put(`/api/product/addToOffer/${rowId}`, {
       ourOffer: itemBol,
     })
       .then(res => {

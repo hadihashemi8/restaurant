@@ -11,7 +11,7 @@ import useFetch from "../../hooks/useFetch";
 
 export default function TodayMenu() {
 
-    const { data, loading, error, isRefresh } = useFetch("http://localhost:3000/api/product/ourOffer")
+    const { data, loading, error, isRefresh } = useFetch("/api/product/ourOffer")
 
 
 

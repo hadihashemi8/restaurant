@@ -65,8 +65,11 @@ export default function UserDetails({ userInfo }) {
                                     </TableCell>
                                     <TableCell align='center'>
                                       
-                                        {userInfo?.isAdmin ? "ادمین" : "کاربر"}
+                                        {userInfo?.isAdmin == "ADMIN" ? "مدیر اصلی" : userInfo?.isAdmin ? "ادمین" : "کاربر"}
                                         
+                                    </TableCell>
+                                    <TableCell align='center'>                                     
+                                      -                                       
                                     </TableCell>
 
 

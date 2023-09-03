@@ -15,6 +15,13 @@ export default async function handler(req, res) {
 
         res.status(201).json({ msg: "this user is admin" })
 
+    } else if (req.method == "GET") {
+
+        const items = await User.find()
+
+        const slicedItems = items.slice(-uId)
+
+        res.status(201).json({ status: true, data: slicedItems })
     }
 
 }

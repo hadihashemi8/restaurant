@@ -15,7 +15,7 @@ import useFetch from "../../hooks/useFetch";
 
 export default function OfferSection() {
 
-    const {data , error} = useFetch("http://localhost:3000/api/offer")
+    const {data , error} = useFetch("/api/offer")
 
 
     return (

@@ -53,5 +53,12 @@ export default async function handler(req, res) {
         // await Product.findByIdAndUpdate(pId, newObj)
 
         // res.status(201).json({ msg: "product updated" })
+    } else if (req.method == "GET") {
+
+        const items = await Product.find()
+
+        const slicedItems = items.slice(-pId)
+
+        res.status(201).json({ status: true, data: slicedItems })
     }
 }

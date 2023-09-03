@@ -7,8 +7,7 @@ import { hash } from "bcryptjs"
 async function handler(req, res) {
     await db.connect()
 
-
-
+    
 
     if (req.method === "POST") {
 

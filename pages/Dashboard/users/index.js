@@ -16,6 +16,8 @@ import { Box, Modal } from '@mui/material';
 import UserDetails from '../../../components/UserDetails/UserDetails';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import Loader from '../../../components/Loader/Loader';
+import Image from 'next/image';
 
 
 
@@ -69,8 +71,6 @@ export default function Users() {
     const [userDetailsOpen, setUserDetailsOpen] = useState(false)
 
 
-    
-
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -106,7 +106,7 @@ export default function Users() {
 
     // update user to admin section
     const updateUserToAdmin = async (rowId, isAdmin) => {
-        const response = await axios.put(`http://localhost:3000/api/users/${rowId}`, {
+        const response = await axios.put(`/api/users/${rowId}`, {
             isAdmin
         })
 
@@ -154,7 +154,7 @@ export default function Users() {
 
             const indexUpdateBtn = columns.findIndex(item => item.id == "add-to-admin")
             columns.splice(indexUpdateBtn, 1)
-            
+
             const indexRemoveBtn = columns.findIndex(item => item.id == "remove")
             columns.splice(indexRemoveBtn, 1)
 
@@ -171,74 +171,84 @@ export default function Users() {
 
                     <Title title="لیست کاربران" theme="bg-main-color1" />
 
-                    <Paper dir="rtl" sx={{ width: '100%', overflow: 'hidden', marginTop: '24px' }}>
-                        <TableContainer sx={{ maxHeight: 440 }}>
-                            <Table stickyHeader aria-label="sticky table">
-                                <TableHead>
-                                    <TableRow>
-                                        {columns.map((column) => (
-                                            <TableCell
-                                                className="table-thead"
-                                                key={column.id}
-                                                align={column.align}
-                                                style={{ minWidth: column.minWidth, textAlign: "center" }}
-                                            >
-                                                {column.label}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                        .map((row) => {
-                                            return (
-                                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                    {loading ? <div className='mt-40'> <Loader /></div> : !loading && rows?.length > 0 ?
+                        <Paper dir="rtl" sx={{ width: '100%', overflow: 'hidden', marginTop: '24px' }}>
+                            <TableContainer sx={{ maxHeight: 440 }}>
+                                <Table stickyHeader aria-label="sticky table">
+                                    <TableHead>
+                                        <TableRow>
+                                            {columns.map((column) => (
+                                                <TableCell
+                                                    className="table-thead"
+                                                    key={column.id}
+                                                    align={column.align}
+                                                    style={{ minWidth: column.minWidth, textAlign: "center" }}
+                                                >
+                                                    {column.label}
+                                                </TableCell>
+                                            ))}
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            .map((row) => {
+                                                return (
+                                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
 
-                                                    <TableCell align='center'>
-                                                        {row.name}
-                                                    </TableCell>
-                                                    <TableCell align='center'>
-                                                        {row.phoneNumber}
-                                                    </TableCell>
-
-                                                    <TableCell align='center'>
-                                                        <button onClick={() => showDetailsHandler(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b'> جزئیات</button>
-                                                    </TableCell>
-
-                                                    {session?.user.isAdmin == "ADMIN" && (
                                                         <TableCell align='center'>
-                                                            <button onClick={() => convertUserToAdmin(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b'>
-                                                                {row.isAdmin ? "عزل مدیر" : "ارتقا به مدیر"}
-                                                            </button>
+                                                            {row.name}
                                                         </TableCell>
-                                                    )}
-
-                                                    <TableCell align='center'>
-                                                        <button onClick={() => setUserDetailsOpen(true)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b'> لیست سفارشات</button>
-                                                    </TableCell>
-
-                                                    {session?.user.isAdmin == "ADMIN" && (
                                                         <TableCell align='center'>
-                                                            <button className='bg-main-color5 py-1 px-2 rounded-md text-main-color4 r-b'>حذف</button>
+                                                            {row.phoneNumber}
                                                         </TableCell>
-                                                    )}
-                                                </TableRow>
-                                            );
-                                        })}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                        <TablePagination
 
-                            rowsPerPageOptions={[10]}
-                            component="div"
-                            count={rows?.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </Paper>
+                                                        <TableCell align='center'>
+                                                            <button onClick={() => showDetailsHandler(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b'> جزئیات</button>
+                                                        </TableCell>
+
+                                                        {session?.user.isAdmin == "ADMIN" && (
+                                                            <TableCell align='center'>
+                                                                <button onClick={() => convertUserToAdmin(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b'>
+                                                                    {row.isAdmin ? "عزل مدیر" : "ارتقا به مدیر"}
+                                                                </button>
+                                                            </TableCell>
+                                                        )}
+
+                                                        <TableCell align='center'>
+                                                            <button onClick={() => setUserDetailsOpen(true)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b'> لیست سفارشات</button>
+                                                        </TableCell>
+
+                                                        {session?.user.isAdmin == "ADMIN" && (
+                                                            <TableCell align='center'>
+                                                                <button className='bg-main-color5 py-1 px-2 rounded-md text-main-color4 r-b'>حذف</button>
+                                                            </TableCell>
+                                                        )}
+                                                    </TableRow>
+                                                );
+                                            })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <TablePagination
+
+                                rowsPerPageOptions={[10]}
+                                component="div"
+                                count={rows?.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
+                        </Paper>
+                        : <div className='flex flex-col items-center nmt-5'>
+                            <Image src="/images/No data-cuate.svg" width={400} height={400} alt="empty-svg" />
+                            <h2 className='text-xl text-center m4-8 text-main-color5'>
+                                شما محصولی ندارید
+                            </h2>
+                        </div>}
+
+
+
                 </div>
 
 
@@ -273,15 +283,15 @@ export async function getServerSideProps({ req }) {
             }
 
         }
-    }else if (session && session.user.isAdmin == false) {
+    } else if (session && session.user.isAdmin == false) {
         return {
-          redirect: {
-            destination: "/",
-            premanent: false
-          }
-    
+            redirect: {
+                destination: "/",
+                premanent: false
+            }
+
         }
-      }
+    }
 
 
     return {
