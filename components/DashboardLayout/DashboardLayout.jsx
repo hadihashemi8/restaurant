@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Button from '../Button/Button';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import HomeIcon from '@mui/icons-material/Home';
+import CommentIcon from '@mui/icons-material/Comment';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
@@ -28,6 +29,7 @@ const adminMenueItems = [
   { id: 2, title: "محصولات", to: "/Dashboard/products", icon: <DashboardIcon /> },
   { id: 3, title: "کاربران", to: "/Dashboard/users", icon: <PeopleAltIcon /> },
   { id: 4, title: "تخفیف ها", to: "/Dashboard/offers", icon: <LocalOfferIcon /> },
+  { id: 4, title: "نظرات", to: "/Dashboard/comments", icon: <CommentIcon /> },
 ]
 
 const userMenueItems = [

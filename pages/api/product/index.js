@@ -74,13 +74,13 @@ export default async function handler(req, res) {
                     if (offset) {
 
                         const endSlice = offset
-                        const startSlice = endSlice - 10                  
+                        const startSlice = endSlice - 10
 
-console.log(startSlice , endSlice);
+                        
 
-                        const sliceProducts = products.slice(startSlice , endSlice)
+                        const sliceProducts = products.slice(startSlice, endSlice)
 
-                            res.status(201).json({ status: true, data: sliceProducts })
+                        res.status(201).json({ status: true, data: sliceProducts })
                     } else {
                         res.status(201).json({ status: true, data: products })
                     }

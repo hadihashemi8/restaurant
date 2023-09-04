@@ -4,17 +4,18 @@ import Button from "../Button/Button";
 import BuyBtn from "../BuyBtn/BuyBtn";
 import { Rating } from "@mui/material";
 import styles from '../../styles/Home.module.css'
+import Link from "next/link";
 
 
 
 
-export default function Card({ offerCard  , data}) {
+export default function Card({ offerCard, data }) {
 
     const [showOfferBanner, setShowOfferBanner] = useState(false)
 
 
     useEffect(() => {
-        
+
 
         window.addEventListener("scroll", () => {
             if (window.scrollY >= 700) {
@@ -28,40 +29,42 @@ export default function Card({ offerCard  , data}) {
 
 
     return (
-        <div className={`w-full h-full p-2 group cursor-default rounded-xl max-w-sm mx-auto relative flex items-start flex-col ${offerCard ? "bg-main-color5" : "bg-main-color4 border-[1px] border-gray-400 text-main-color1 shadow-[0_0_2px_rgba(0,0,0,0.4)]"}`}>
-            <div className="w-full h-60 bg-red-100  relative rounded-xl overflow-hidden ">
-                <Image className="group-hover:scale-110 duration-300 " loading="lazy" src="/images/foods/food-1.jpg" alt="food-img" fill sizes="100%" style={{objectFit:"cover" }} />
-                
-            </div>
-            <div className=" flex flex-col items-start w-full text-res-600">
-                <div className="w-full flex items-center justify-between mt-3">   
-                <h3 className={`text-xl ${offerCard ? "text-main-color4" : "text-main-color1"}`}>{data?.name}</h3>
+        <Link href="#">
+            <div className={`w-full h-full p-2 group rounded-xl max-w-sm mx-auto relative flex items-start flex-col ${offerCard ? "bg-main-color5" : "bg-main-color4 border-[1px] border-gray-400 text-main-color1 shadow-[0_0_2px_rgba(0,0,0,0.4)]"}`}>
+                <div className="w-full h-60 bg-red-100  relative rounded-xl overflow-hidden ">
+                    <Image className="group-hover:scale-110 duration-300 " loading="lazy" src="/images/foods/food-1.jpg" alt="food-img" fill sizes="100%" style={{ objectFit: "cover" }} />
 
-                <Rating  name="read-only" value={4} readOnly size="small"/>
                 </div>
-                <div className="flex items-center justify-between mt-3">
-                <p className={`${offerCard ? "text-main-color4" : "text-main-color1"}`}>قیمت :   {
-                    offerCard ?  (data?.offerPresent == 0 ? data?.price :((data?.price - (data?.offerPresent * data?.price) / 100) == 0 ? "رایگان" : `${(data?.price - (data?.offerPresent * data?.price) / 100)} تومان`)) : data?.price
-                } </p>
-                {offerCard && (
-                    <p className={` line-through text-sm  mr-2 ${offerCard ? "text-gray-300" : "text-main-color1"}`}> {data?.price} تومان</p>
-                )}
-                </div>
-                <div className="w-full flex items-center justify-between mt-3">
-                    <p className={`text-sm ${offerCard ? "text-main-color4" : "text-main-color1"}`}>{data?.aboutProduct}</p>
-                    <div >
-                        <BuyBtn title="سفارش غذا" color={offerCard ? "bg-main-color4" : "bg-main-color5"} textColor={offerCard ? "text-main-color1" : "text-main-color4"} />
+                <div className=" flex flex-col items-start w-full text-res-600">
+                    <div className="w-full flex items-center justify-between mt-3">
+                        <h3 className={`text-xl ${offerCard ? "text-main-color4" : "text-main-color1"}`}>{data?.name}</h3>
+
+                        <Rating name="read-only" value={4} readOnly size="small" />
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                        <p className={`${offerCard ? "text-main-color4" : "text-main-color1"}`}>قیمت :   {
+                            offerCard ? (data?.offerPresent == 0 ? data?.price : ((data?.price - (data?.offerPresent * data?.price) / 100) == 0 ? "رایگان" : `${(data?.price - (data?.offerPresent * data?.price) / 100)} تومان`)) : data?.price
+                        } </p>
+                        {offerCard && (
+                            <p className={` line-through text-sm  mr-2 ${offerCard ? "text-gray-300" : "text-main-color1"}`}> {data?.price} تومان</p>
+                        )}
+                    </div>
+                    <div className="w-full flex items-center justify-between mt-3">
+                        <p className={`text-sm ${offerCard ? "text-main-color4" : "text-main-color1"}`}>{data?.aboutProduct}</p>
+                        <div >
+                            <BuyBtn title="سفارش غذا" color={offerCard ? "bg-main-color4" : "bg-main-color5"} textColor={offerCard ? "text-main-color1" : "text-main-color4"} />
+                        </div>
                     </div>
                 </div>
-            </div>
-            
 
-            {offerCard && (
-                <div className={`w-24  absolute -top-[18.5px] left-2  flex items-center justify-center duration-1000 ${showOfferBanner ? "h-24" : "h-0"}`}>
-                    <Image src="/images/offer-banner2.png" alt="offer-banner" fill sizes="100%" />
-                    <p className="z-10 text-main-color4 font-300">{data?.offerPresent} %</p>
-                </div>
-            )}
-        </div>
+
+                {offerCard && (
+                    <div className={`w-24  absolute -top-[18.5px] left-2  flex items-center justify-center duration-1000 ${showOfferBanner ? "h-24" : "h-0"}`}>
+                        <Image src="/images/offer-banner2.png" alt="offer-banner" fill sizes="100%" />
+                        <p className="z-10 text-main-color4 font-300">{data?.offerPresent} %</p>
+                    </div>
+                )}
+            </div>
+        </Link>
     )
 }

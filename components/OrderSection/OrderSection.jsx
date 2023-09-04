@@ -26,8 +26,8 @@ export default function OrderSection() {
                             <Image src="/images/order-section-img2.jpg" fill loading='lazy' sizes='100%' style={{ objectFit: "cover" }} />
                             <div className='bg-[rgba(0,0,0,0.5)] hover:bg-[rgba(0,0,0,0.4)] duration-300 flex items-center justify-center w-full h-full absolute top-0 left-0'>
                                 
-                                <Button title="رزرو میز" />
-                               
+                                <Button title="رزرو میز" to="/reservation" />
+                                
                             </div>
                         </div>
                     </div>

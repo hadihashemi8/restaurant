@@ -169,7 +169,6 @@ export default function FoodsMenue() {
     }, [selector])
 
     useEffect(() => {
-        console.log(items);
         dispatch(filterProducts({ filterOptionChips, items }))
     }, [items])
 
@@ -204,105 +203,110 @@ export default function FoodsMenue() {
 
 
     return (
-        <Layout>
-            <div className='mt-24 '>
-                <Title title="منوی غذا" theme="bg-main-color5" />
+        <>
 
-                <div className=' sm:border-[1px] border-gray-300 sm:rounded-xl grid grid-cols-1 lg:grid-cols-3 gap-4 relative mt-14 p-1'>
+        <title>منوی غذا</title>
 
-                    <div className={`bg-main-color4 lg:col-span-1 lg:relative  absolute top-0  w-full h-full duration-300 flex flex-col items-center z-30 p-4 border-l-[1px] border-gray-300 ${showFilterSection ? "right-0 block" : "-right-full lg:right-0 hidden lg:block"}`}>
-                        <div className='flex items-center justify-center p-2 lg:hidden'>
-                            <button className='flex items-center justify-center bg-main-color1 text-main-color4 py-2 px-5 rounded-xl text-xl' onClick={() => setShowFilterSection(false)}>
-                                <CancelIcon />
-                            </button>
+            <Layout>
+                <div className='mt-24 '>
+                    <Title title="منوی غذا" theme="bg-main-color5" />
 
-                        </div>
+                    <div className=' sm:border-[1px] border-gray-300 sm:rounded-xl grid grid-cols-1 lg:grid-cols-3 gap-4 relative mt-14 p-1'>
 
-                        <div className=' w-full sticky top-0 left-0 p-2 flex flex-col items-center'>
-                            <Stack className='w-full bg-white p-4 flex flex-wrap items-start justify-center gap-2 rounded-md' direction="row" >
-                                {filterOptionChips.length > 0 ? (filterOptionChips.map(item =>
-                                    <Chip key={item.id} className='flex items-center flex-row-reverse  chip' label={item} onDelete={handleDelete(item)} />
-                                )) : <p>هیچ فیلتری انتخاب نشده است</p>}
+                        <div className={`bg-main-color4 lg:col-span-1 lg:relative overflow-y-scroll lg:overflow-y-auto  absolute top-0  w-full h-full duration-300 flex flex-col items-center z-30 p-4 border-l-[1px] border-gray-300 ${showFilterSection ? "right-0 block" : "-right-full lg:right-0 hidden lg:block"}`}>
+                            <div className='flex items-center justify-center p-2 lg:hidden'>
+                                <button className='flex items-center justify-center bg-main-color1 text-main-color4 py-2 px-5 rounded-xl text-xl' onClick={() => setShowFilterSection(false)}>
+                                    <CancelIcon />
+                                </button>
 
-
-                            </Stack>
-
-                            <Accordion className="mt-4 rounded-md w-full  overflow-hidden">
-                                <AccordionSummary
-                                    className="rounded-md "
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1a-content"
-                                    id="panel1a-header"
-                                >
-                                    <Typography>دسته بندی</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails >
-                                    <FormGroup onChange={changeHandle}>
-                                        {filterOptionItems.map(item => (
-                                            <FormControlLabel key={item.id} checked={item.isChecked} control={<Checkbox />} label={item.option} value={item.option} />
-                                        ))}
-
-                                    </FormGroup>
-                                </AccordionDetails>
-                            </Accordion>
-
-                            <Accordion className="mt-4 rounded-md w-full  overflow-hidden">
-                                <AccordionSummary
-                                    className="rounded-md "
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1a-content"
-                                    id="panel1a-header"
-                                >
-                                    <Typography>فیلتر بر اساس قیمت</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails className="flex flex-col items-center">
-                                    <Box sx={{ width: '90%' }}>
-                                        <Slider
-                                            // getAriaLabel={() => 'Temperature range'}
-                                            value={value}
-                                            onChange={handleChange}
-                                            valueLabelDisplay="auto"
-                                            min={0}
-                                            max={200000}
-                                        // getAriaValueText={valuetext}
-                                        />
-                                    </Box>
-                                    <p className='mt-4'>{value[1]} تومان - {value[0]} تومان</p>
-                                </AccordionDetails>
-                            </Accordion>
-
-                            <button onClick={filterHandler} className='bg-main-color5 py-2 rounded-md w-full mt-4 text-main-color4'>اعمال فیلتر</button>
-                        </div>
-                    </div>
-
-                    <div className=' col-span-1 lg:col-span-2 flex flex-col  relative'>
-                        <div className='flex items-center justify-center p-2 lg:hidden '>
-                            <button className='flex items-center justify-center bg-main-color1 text-main-color4 py-2 px-5 rounded-xl text-xl' onClick={() => setShowFilterSection(true)}>
-                                فیلتر
-                                <TuneIcon className='mr-1 ' />
-                            </button>
-                        </div>
-
-                        <InfiniteScroll
-                            dataLength={items.length}
-                            next={fetchMoreData}
-                            hasMore={hasMore}
-                            loader={<Loader />}
-                        >
-                            <div className='w-full  p-2 gap-2   grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
-                                {products?.map(item => (
-                                    <div key={item.id} className='col-span-1 '>
-                                        <Card offerCard={false} data={item} />
-                                    </div>
-                                ))}
-                                { }
                             </div>
-                        </InfiniteScroll>
+
+                            <div className=' w-full sticky top-0 left-0 p-2 flex flex-col items-center'>
+                                <Stack className='w-full bg-white p-4 flex flex-wrap items-start justify-center gap-2 rounded-md' direction="row" >
+                                    {filterOptionChips.length > 0 ? (filterOptionChips.map(item =>
+                                        <Chip key={item.id} className='flex items-center flex-row-reverse  chip' label={item} onDelete={handleDelete(item)} />
+                                    )) : <p>هیچ فیلتری انتخاب نشده است</p>}
+
+
+                                </Stack>
+
+                                <Accordion className="mt-4 rounded-md w-full  overflow-hidden">
+                                    <AccordionSummary
+                                        className="rounded-md "
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                    >
+                                        <Typography>دسته بندی</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails >
+                                        <FormGroup onChange={changeHandle}>
+                                            {filterOptionItems.map(item => (
+                                                <FormControlLabel key={item.id} checked={item.isChecked} control={<Checkbox />} label={item.option} value={item.option} />
+                                            ))}
+
+                                        </FormGroup>
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion className="mt-4 rounded-md w-full  overflow-hidden">
+                                    <AccordionSummary
+                                        className="rounded-md "
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                    >
+                                        <Typography>فیلتر بر اساس قیمت</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails className="flex flex-col items-center">
+                                        <Box sx={{ width: '90%' }}>
+                                            <Slider
+                                                // getAriaLabel={() => 'Temperature range'}
+                                                value={value}
+                                                onChange={handleChange}
+                                                valueLabelDisplay="auto"
+                                                min={0}
+                                                max={200000}
+                                            // getAriaValueText={valuetext}
+                                            />
+                                        </Box>
+                                        <p className='mt-4'>{value[1]} تومان - {value[0]} تومان</p>
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <button onClick={filterHandler} className='bg-main-color5 py-2 rounded-md w-full mt-4 text-main-color4'>اعمال فیلتر</button>
+                            </div>
+                        </div>
+
+                        <div className=' col-span-1 lg:col-span-2 flex flex-col   relative'>
+                            <div className='flex items-center justify-center p-2 lg:hidden '>
+                                <button className='flex items-center justify-center bg-main-color1 text-main-color4 py-2 px-5 rounded-xl text-xl' onClick={() => setShowFilterSection(true)}>
+                                    فیلتر
+                                    <TuneIcon className='mr-1 ' />
+                                </button>
+                            </div>
+
+                            <InfiniteScroll
+                                dataLength={items.length}
+                                next={fetchMoreData}
+                                hasMore={hasMore}
+                                loader={<Loader />}
+                            >
+                                <div className='w-full p-2 gap-2   grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
+                                    {products?.map(item => (
+                                        <div key={item.id} className='col-span-1 '>
+                                            <Card offerCard={false} data={item} />
+                                        </div>
+                                    ))}
+                                    { }
+                                </div>
+                            </InfiniteScroll>
+
+                        </div>
 
                     </div>
-
                 </div>
-            </div>
-        </Layout>
+            </Layout>
+        </>
     )
 }

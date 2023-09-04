@@ -11,16 +11,22 @@ import { useEffect } from "react";
 export default function Home() {
 
 
-  
+
   return (
-    <Layout>
-    
-      <Categories />
-      <OfferSection />
-      <AboutUs />
-      <TodayMenu />
-      <OrderSection />
-      <ContactUs />
-    </Layout>
+    <>
+      
+        <title>صفحه اصلی</title>
+      
+
+      <Layout>
+
+        <Categories />
+        <OfferSection />
+        <AboutUs />
+        <TodayMenu />
+        <OrderSection />
+        <ContactUs />
+      </Layout>
+    </>
   )
 }

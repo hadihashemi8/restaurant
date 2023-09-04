@@ -17,6 +17,9 @@
     --main-color5: #EE4041;
    
 }
+body{
+    direction: rtl;
+}
 
 body,
 .MuiTypography-root {

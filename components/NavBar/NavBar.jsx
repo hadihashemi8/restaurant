@@ -81,9 +81,6 @@ export default function NavBar() {
         </Box>
     );
 
-    useEffect(() => {
-        console.log(session);
-    }, [session])
 
     const logOutHandler = () => {
         Swal.fire({
@@ -108,7 +105,7 @@ export default function NavBar() {
 
 
     return (
-        <nav className="bg-main-color1 " >
+        <nav className="bg-main-color1 w-full" >
             <div className=" flex h-14 lg:h-auto container mx-auto  items-center justify-between   px-8">
                 <ul className="lg:flex items-center justify-between  hidden  ">
                     <Link className="ml-4 p-2 py-4 relative menu-item text-main-color4 w-[120px]  text-center" href="/">
