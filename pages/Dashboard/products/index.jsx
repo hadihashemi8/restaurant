@@ -87,7 +87,7 @@ export default function Products() {
   const [itemRows, setItemRows] = useState([])
 
 
-  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -108,7 +108,7 @@ export default function Products() {
       cancelButtonColor: "#EE4041",
       confirmButtonText: "بله",
       confirmButtonColor: "#025464",
-      reverseButtons: true
+      
     }).then(res => {
       if (res.isConfirmed) {
 
@@ -223,16 +223,16 @@ export default function Products() {
 
   return (
     <DashboardLayout>
-      <div className='w-full h-full grid grid-cols-1  gap-4'>
+      <div className='w-full h-full grid grid-cols-1  gap-4 '>
 
         <div className=' col-span-1  p-4 '>
-          <div className='w-full flex flex-col md:flex-row-reverse items-center justify-center'>
+          <div className='w-full flex flex-col md:flex-row items-center justify-center'>
             <div className='w-full md:flex-1'>
               <Title title="لیست منو" theme="bg-main-color5" />
             </div>
             <button onClick={() => setAddMenueOpen(true)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b md:self-start mt-8 md:mt-0'>افزودن به منو</button>
           </div>
-          {loading ? <div className='mt-40'> <Loader/></div> : !loading && itemRows.length > 0 ?
+          {loading ? <div className='mt-40'> <Loader /></div> : !loading && itemRows.length > 0 ?
             <Paper dir="rtl" sx={{ width: '100%', overflow: 'hidden', marginTop: '24px' }}>
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
@@ -307,14 +307,13 @@ export default function Products() {
         </div>
 
 
-        <Modal
-
+        <Modal         
           open={addMenueOpen}
           onClose={() => setAddMenueOpen(false)}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%]  rounded-xl bg-white p-4 ">
+          <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%]  lg:w-[50%] rounded-xl bg-white p-4 ">
             <AddToMenueSection isRefresh={isRefresh} />
 
           </Box>
@@ -327,7 +326,7 @@ export default function Products() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%]  rounded-xl bg-white p-4 ">
+          <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] lg:w-[50%]  rounded-xl bg-white p-4 ">
             <EditMenue product={productInfo} closeEditModal={closeEditModal} isRefresh={isRefresh} />
 
           </Box>

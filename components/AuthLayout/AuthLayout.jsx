@@ -19,13 +19,16 @@ export default function AuthLayout({ children }) {
 
                     <div className='grid grid-cols-1 sm:grid-cols-2 h-full    bg-white'>
 
+
+                        {/* forms section */}
+                        {children}
+
+                        
                         {/* bg section */}
                         <div className={`relative  duration-200 hidden sm:flex col-span-1 w-full`}>
                             <Image alt="login-img" src="/images/login-form-bg2.jpg" fill sizes='100%' style={{ objectFit: "cover" }} />
                         </div>
 
-                        {/* forms section */}
-                        {children}
 
                     </div>
                 </div>

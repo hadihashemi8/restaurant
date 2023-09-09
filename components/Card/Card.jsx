@@ -2,9 +2,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import BuyBtn from "../BuyBtn/BuyBtn";
-import { Rating } from "@mui/material";
+import { Box, Modal, Rating } from "@mui/material";
 import styles from '../../styles/Home.module.css'
 import Link from "next/link";
+import ProductDetailsModal from "../ProductDetailsModal/ProductDetailsModal";
 
 
 
@@ -12,7 +13,7 @@ import Link from "next/link";
 export default function Card({ offerCard, data }) {
 
     const [showOfferBanner, setShowOfferBanner] = useState(false)
-
+    const [detailsModal, setDetailsModal] = useState(false)
 
     useEffect(() => {
 
@@ -24,13 +25,20 @@ export default function Card({ offerCard, data }) {
         })
     }, [])
 
+    useEffect(() => {
+        console.log(data);
+    } , [data])
 
 
+    const addToCard = (e) => {
+        e.stopPropagation()
+
+    }
 
 
     return (
-        <Link href="#">
-            <div className={`w-full h-full p-2 group rounded-xl max-w-sm mx-auto relative flex items-start flex-col ${offerCard ? "bg-main-color5" : "bg-main-color4 border-[1px] border-gray-400 text-main-color1 shadow-[0_0_2px_rgba(0,0,0,0.4)]"}`}>
+        <>
+            <div onClick={() => setDetailsModal(true)} className={`w-full h-full p-2 group rounded-xl max-w-sm mx-auto relative flex items-start flex-col cursor-pointer ${offerCard ? "bg-main-color5" : "bg-main-color4 border-[1px] border-gray-400 text-main-color1 shadow-[0_0_2px_rgba(0,0,0,0.4)]"}`}>
                 <div className="w-full h-60 bg-red-100  relative rounded-xl overflow-hidden ">
                     <Image className="group-hover:scale-110 duration-300 " loading="lazy" src="/images/foods/food-1.jpg" alt="food-img" fill sizes="100%" style={{ objectFit: "cover" }} />
 
@@ -52,7 +60,7 @@ export default function Card({ offerCard, data }) {
                     <div className="w-full flex items-center justify-between mt-3">
                         <p className={`text-sm ${offerCard ? "text-main-color4" : "text-main-color1"}`}>{data?.aboutProduct}</p>
                         <div >
-                            <BuyBtn title="سفارش غذا" color={offerCard ? "bg-main-color4" : "bg-main-color5"} textColor={offerCard ? "text-main-color1" : "text-main-color4"} />
+                            <BuyBtn buyFunc={addToCard} title="سفارش غذا" color={offerCard ? "bg-main-color4" : "bg-main-color5"} textColor={offerCard ? "text-main-color1" : "text-main-color4"} />
                         </div>
                     </div>
                 </div>
@@ -65,6 +73,20 @@ export default function Card({ offerCard, data }) {
                     </div>
                 )}
             </div>
-        </Link>
+
+
+            <Modal
+            
+                open={detailsModal}
+                onClose={() => setDetailsModal(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   rounded-xl w-[80%] bg-white p-4 ">
+                    <ProductDetailsModal infos={data} offerCard={offerCard}/>
+                </Box>
+            </Modal>
+
+        </>
     )
 }

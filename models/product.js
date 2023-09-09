@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema({
     aboutProductFull: { type: String, required: true },
     categories: { type: String, required: true },
     image: { type: String, required: true },
+    comments: { type: Array, required: false },
     ourOffer:{type:Boolean , required:false},
     offerPresent:{type:Number , required:false},
 } , { timestamps: true })

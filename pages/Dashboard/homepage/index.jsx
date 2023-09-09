@@ -16,27 +16,30 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout>
-      <div className='w-full h-full  grid grid-cols-1 lg:grid-cols-2 gap-8' dir='rtl'>
+      <div className='w-full   grid grid-cols-1 lg:grid-cols-2 gap-8' >
+
         <div className='col-span-1    grid gap-4 grid-rows-3'>
 
           <div className=" rounded-xl row-span-1 shadow-[0_0_5px_rgba(0,0,0,0.4)] p-2 ">
             <UserCard />
           </div>
 
-          <div className="h-full flex items-center justify-center row-span-2 pt-4 shadow-[0_0_5px_rgba(0,0,0,0.4)] rounded-xl p-2 ">
+          <div className="h-auto flex items-center justify-center row-span-2 pt-4 shadow-[0_0_5px_rgba(0,0,0,0.4)] rounded-xl p-2 ">
             <LastUserTable />
           </div>
 
         </div>
+
         <div className='col-span-1  grid gap-4 grid-rows-3 '>
-          <div className='row-span-2 overflow-x-scroll shadow-[0_0_5px_rgba(0,0,0,0.4)] rounded-xl p-2 col-span-1'>
+          <div className='row-span-2 w-full  overflow-x-scroll lg:overflow-x-auto shadow-[0_0_5px_rgba(0,0,0,0.4)] rounded-xl p-2 col-span-1'>
             <LastProductsTable />
           </div>
 
-          <div className=" rounded-xl row-span-1 shadow-[0_0_5px_rgba(0,0,0,0.4)] p-2 ">
+         <div className=" rounded-xl row-span-1 shadow-[0_0_5px_rgba(0,0,0,0.4)] p-2 ">
             <AdminActions/>
-          </div>
+          </div> 
         </div>
+
       </div>
     </DashboardLayout>
   )

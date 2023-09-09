@@ -28,7 +28,7 @@ const LastUserTable = () => {
     }, [userNumber])
 
     return (
-        <div className=' w-full   flex flex-col items-center justify-start  h-72  '>
+        <div className=' w-full   flex flex-col items-center justify-start  h-80 lg:h-72  '>
             <h2 className='text-xl'>آخرین کاربران ثبت شده</h2>
 
             <div className='mt-4 flex items-center justify-start w-full'>
@@ -46,6 +46,7 @@ const LastUserTable = () => {
                         <tr>
                             <th className='p-4 border-1 '>نام کاربر</th>
                             <th className='p-4 border-1 '>شماره تلفن</th>
+                            
                         </tr>
                     </thead>
 

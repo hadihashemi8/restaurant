@@ -10,32 +10,32 @@ export default NextAuth({
     },
     callbacks: {
         async jwt({ token, user }) {
-          
 
             if (user) {
                 return {
                     ...token,
-                    id: user._id.toString() ,
+                    id: user._id.toString(),
                     phoneNumber: user.phoneNumber,
+                    comments: user.comments,
                     isAdmin: user.isAdmin
                 }
             }
 
-
             return token
         },
         async session({ session, token }) {
-           
-                return {
-                    ...session,
-                    user: {
-                        ...session.user,
-                        id:token.id,
-                        phoneNumber: token.phoneNumber,
-                        isAdmin:token.isAdmin
-                    }
+
+            return {
+                ...session,
+                user: {
+                    ...session.user,
+                    id: token.id,
+                    phoneNumber: token.phoneNumber,
+                    comments: token.comments,
+                    isAdmin: token.isAdmin
                 }
- 
+            }
+
         }
     },
 
@@ -49,7 +49,7 @@ export default NextAuth({
                 // check user 
                 const user = await User.findOne({ phoneNumber: credentials.phoneNumber })
 
-                
+
                 // check password
                 if (user && bcrypt.compareSync(credentials.password, user.password)) {
 
@@ -57,8 +57,9 @@ export default NextAuth({
                         _id: user._id,
                         name: user.fullName,
                         phoneNumber: user.phoneNumber,
+                        comments: user.comments,
                         isAdmin: user.isAdmin,
-                        
+
                     }
                 }
 

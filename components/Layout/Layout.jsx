@@ -8,6 +8,8 @@ import dynamic from "next/dynamic"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const NavBar = dynamic(() => import("../NavBar/NavBar"), { ssr: false })
 
@@ -27,7 +29,9 @@ export default function Layout({ children }) {
 
 
     return (
-        <div className="max-w-screen-2xl  min-h-screen mx-auto bg-main-color4 " >
+        <div className="max-w-screen-2xl  min-h-screen mx-auto bg-main-color4 relative" >
+      <ToastContainer className="text-center font " />
+
             <header >
                 <NavBar />
                 <div className="p-4 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-4  relative h-[600px]" >

@@ -10,7 +10,7 @@ export default function DropDown() {
     const { status, data: session } = useSession()
     const [anchorEl, setAnchorEl] = useState(null);
 
-    
+
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -19,30 +19,30 @@ export default function DropDown() {
         setAnchorEl(null);
     };
 
-   
+
     const logOutHandler = () => {
-      Swal.fire({
-          title: "میخواهید خارج شوید؟",
-          icon: "question",
-          showCancelButton: "true",
-          cancelButtonText: "لغو",
-          cancelButtonColor: "#EE4041",
-          confirmButtonText: "بله",
-          confirmButtonColor: "#025464",
-          reverseButtons: true
-      }).then(res => {
-          if (res.isConfirmed) {
-              Cookies.remove()
+        Swal.fire({
+            title: "میخواهید خارج شوید؟",
+            icon: "question",
+            showCancelButton: "true",
+            cancelButtonText: "لغو",
+            cancelButtonColor: "#EE4041",
+            confirmButtonText: "بله",
+            confirmButtonColor: "#025464",
 
-              signOut({ callbackUrl: '/' })
-          }
-      })
+        }).then(res => {
+            if (res.isConfirmed) {
+                Cookies.remove()
 
-  }
+                signOut({ callbackUrl: '/' })
+            }
+        })
+
+    }
 
     return (
         <>
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' , }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', }}>
 
                 <IconButton
                     onClick={handleClick}
@@ -56,7 +56,7 @@ export default function DropDown() {
 
             </Box>
             <Menu
-           
+
                 anchorEl={anchorEl}
                 id="account-menu"
                 open={open}
@@ -92,11 +92,17 @@ export default function DropDown() {
                 }}
 
             >
-                <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1" >
+                <MenuItem className="flex items-center justify-between  d-item text-main-color1" >
                     {session?.user.name}
                 </MenuItem>
                 <Divider />
-                <MenuItem className="flex items-center justify-start flex-row-reverse d-item text-main-color5 mt-2" onClick={logOutHandler}>
+                <Link href='/Dashboard/homepage'>
+                    <MenuItem className="flex items-center justify-start  d-item text-main-color1 mb-2" >
+                        {session?.user.isAdmin ? "پنل ادمین" : "پنل کاربری"}
+                    </MenuItem>
+                </Link>
+                <Divider />
+                <MenuItem className="flex items-center justify-start  d-item text-main-color5 mt-2" onClick={logOutHandler}>
                     خروج
                 </MenuItem>
             </Menu>

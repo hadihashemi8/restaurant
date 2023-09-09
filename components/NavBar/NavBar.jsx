@@ -27,6 +27,7 @@ import Swal from 'sweetalert2';
 import Title from "../Title/Title"
 import QuieckMenu from '../QuieckMenu/QuieckMenu';
 import Button from '../Button/Button';
+import DropDown from '../DropDown/DropDown';
 
 
 const sideBarItems = [
@@ -42,13 +43,7 @@ export default function NavBar() {
     const { status, data: session } = useSession()
     const [showSideBar, setShowSideBar] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+  
 
     const toggleDrawer = (open) => {
         setShowSideBar(open);
@@ -82,26 +77,11 @@ export default function NavBar() {
     );
 
 
-    const logOutHandler = () => {
-        Swal.fire({
-            title: "میخواهید خارج شوید؟",
-            icon: "question",
-            showCancelButton: "true",
-            cancelButtonText: "لغو",
-            cancelButtonColor: "#EE4041",
-            confirmButtonText: "بله",
-            confirmButtonColor: "#025464",
-            reverseButtons: true
-        }).then(res => {
-            if (res.isConfirmed) {
-                Cookies.remove()
+   
 
-                signOut({ callbackUrl: '/' })
-            }
-        })
-
-    }
-
+    useEffect(() => {
+        console.log(session);
+    } , [session])
 
 
     return (
@@ -154,73 +134,8 @@ export default function NavBar() {
 
 
                 {status == "loading" ? "loading" : session?.user ? (
-                    <>
-                        <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-
-                            <IconButton
-                                onClick={handleClick}
-                                size="small"
-                                aria-controls={open ? 'account-menu' : undefined}
-                                aria-haspopup="true"
-                                aria-expanded={open ? 'true' : undefined}
-                            >
-                                <Avatar />
-                            </IconButton>
-
-                        </Box>
-                        <Menu
-                            anchorEl={anchorEl}
-                            id="account-menu"
-                            open={open}
-                            onClose={handleClose}
-                            onClick={handleClose}
-                            PaperProps={{
-                                elevation: 0,
-                                sx: {
-                                    overflow: 'visible',
-                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                    mt: 1.5,
-                                    '& .MuiAvatar-root': {
-                                        width: 32,
-                                        height: 'auto',
-                                        mr: -0.5,
-                                        ml: 1,
-
-
-                                    },
-                                    '&:before': {
-                                        content: '""',
-                                        display: 'block',
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 14,
-                                        width: 10,
-                                        height: 10,
-                                        bgcolor: 'background.paper',
-                                        transform: 'translateY(-50%) rotate(45deg)',
-                                        zIndex: 0,
-                                    },
-                                },
-                            }}
-
-                        >
-                            <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1" >
-                                {session.user.name}
-                            </MenuItem>
-                            <Divider />
-                            <Link href='/Dashboard/homepage'>
-                                <MenuItem className="flex items-center justify-between flex-row-reverse d-item text-main-color1 mb-2" >
-                                    {session.user.isAdmin ? "پنل ادمین" : "پنل کاربری"}
-                                </MenuItem>
-                            </Link>
-
-                            <Divider />
-
-                            <MenuItem className="flex items-center justify-start flex-row-reverse d-item text-main-color5 mt-2" onClick={logOutHandler}>
-                                خروج
-                            </MenuItem>
-                        </Menu>
-                    </>
+                    
+                    <DropDown/>
                 ) : (
                     <div >
                         <Link className="group flex items-center justify-between  p-2 py-4 relative menu-item text-main-color4 w-[140px]  text-center" href="/SignUp">

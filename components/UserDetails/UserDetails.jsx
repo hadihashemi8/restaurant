@@ -1,32 +1,32 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 
-const columns = [
-    { id: 'name', label: 'نام کاربر', minWidth: 150 },
-    { id: 'phoneNumber', label: 'شماره تلفن', minWidth: 150 },
-    {
-        id: 'user-role',
-        label: 'نقش کاربر',
-        minWidth: 150,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'total-transaction',
-        label: 'مجموع تراکنش',
-        minWidth: 150,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-];
+;
 
 
-export default function UserDetails({ userInfo }) {
+export default function UserDetails({ userInfo, transAction }) {
 
 
-
+    const [columns, setColumns] = useState([
+        { id: 'name', label: 'نام کاربر', minWidth: 150 },
+        { id: 'phoneNumber', label: 'شماره تلفن', minWidth: 150 },
+        {
+            id: 'user-role',
+            label: 'نقش کاربر',
+            minWidth: 150,
+            align: 'right',
+            format: (value) => value.toLocaleString('en-US'),
+        },
+        transAction && {
+            id: 'total-transaction',
+            label: 'مجموع تراکنش',
+            minWidth: 150,
+            align: 'right',
+            format: (value) => value.toLocaleString('en-US'),
+        },
+    ])
 
 
     return (
@@ -64,13 +64,15 @@ export default function UserDetails({ userInfo }) {
                                         {userInfo?.phoneNumber}
                                     </TableCell>
                                     <TableCell align='center'>
-                                      
+
                                         {userInfo?.isAdmin == "ADMIN" ? "مدیر اصلی" : userInfo?.isAdmin ? "ادمین" : "کاربر"}
-                                        
+
                                     </TableCell>
-                                    <TableCell align='center'>                                     
-                                      -                                       
-                                    </TableCell>
+                                    {transAction && (
+                                        <TableCell align='center'>
+                                            -
+                                        </TableCell>
+                                    )}
 
 
 

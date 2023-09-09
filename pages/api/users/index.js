@@ -7,7 +7,7 @@ import { hash } from "bcryptjs"
 async function handler(req, res) {
     await db.connect()
 
-    
+
 
     if (req.method === "POST") {
 
@@ -24,7 +24,7 @@ async function handler(req, res) {
 
         console.log(usersCount);
 
-        User.create({ fullName, phoneNumber, password: await hash(password, 12), isAdmin: usersCount == 0 ? "ADMIN" : false })
+        User.create({ fullName, phoneNumber, password: await hash(password, 12), comments: [], isAdmin: usersCount == 0 ? "ADMIN" : false })
             .then(data => {
                 if (data) {
                     res.status(201).json({ status: true, user: data })
@@ -40,7 +40,7 @@ async function handler(req, res) {
 
                 }
             }).catch(err => res.status(404).join({ err }))
-    }else {
+    } else {
         res.status(500).json({ message: "htttp method not valid only POST Accepted" })
     }
 

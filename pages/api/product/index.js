@@ -41,6 +41,7 @@ export default async function handler(req, res) {
                 aboutProductFull: fields.aboutProductFull[0],
                 categories: fields.categories[0],
                 image: files.file[0].filepath,
+                comments:[],
                 offerPresent: 0,
                 ourOffer: false
 
@@ -62,10 +63,6 @@ export default async function handler(req, res) {
 
 
     } else if (req.method == "GET") {
-
-
-
-
 
         await Product.find()
             .then(products => {

@@ -54,12 +54,10 @@ html {
 
 }
 
+
+
 .swal2-title {
     font-size: 20px;
     color: var(--main-color1);
 }
 
-/* .active-dashboard-link{
-    color: var(--main-color4) !important;
-    background-color: var(--main-color1) !important;
-} */

@@ -24,6 +24,7 @@ import { filterProducts } from '../../redux/slices/filterSlice';
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import Loader from '../../components/Loader/Loader';
+import { useRouter } from 'next/router';
 
 
 
@@ -36,6 +37,9 @@ function valuetext(value) {
 
 
 export default function FoodsMenue() {
+
+
+    const router = useRouter()
 
     // infinite scroll data
     const [items, setItems] = useState([]);
@@ -177,6 +181,10 @@ export default function FoodsMenue() {
         dispatch(filterProducts({ filterOptionChips, items }))
     }
 
+    useEffect(() => {
+        console.log(router);
+    }, [router])
+
 
 
     // infinite scroll section
@@ -205,7 +213,7 @@ export default function FoodsMenue() {
     return (
         <>
 
-        <title>منوی غذا</title>
+            <title>منوی غذا</title>
 
             <Layout>
                 <div className='mt-24 '>

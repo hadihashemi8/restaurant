@@ -261,7 +261,7 @@ export default function Users() {
                 >
                     <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   rounded-xl bg-white p-4 ">
 
-                        <UserDetails userInfo={userInfo} />
+                        <UserDetails userInfo={userInfo} transAction={true} />
                     </Box>
                 </Modal>
             </div>
@@ -271,6 +271,8 @@ export default function Users() {
 
 
 export async function getServerSideProps({ req }) {
+
+
     const session = await getSession({ req })
 
 
@@ -295,6 +297,6 @@ export async function getServerSideProps({ req }) {
 
 
     return {
-        props: {}
+        props: {  }
     }
 }
