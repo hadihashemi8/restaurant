@@ -136,7 +136,7 @@ export default function Users() {
             cancelButtonColor: "#EE4041",
             confirmButtonText: "بله",
             confirmButtonColor: "#025464",
-            reverseButtons: true
+           
         }).then(res => {
             if (res.isConfirmed) {
                 updateUserToAdmin(rowId, isAdmin)
@@ -203,19 +203,19 @@ export default function Users() {
                                                         </TableCell>
 
                                                         <TableCell align='center'>
-                                                            <button onClick={() => showDetailsHandler(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b'> جزئیات</button>
+                                                            <button onClick={() => showDetailsHandler(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b '> جزئیات</button>
                                                         </TableCell>
 
                                                         {session?.user.isAdmin == "ADMIN" && (
                                                             <TableCell align='center'>
-                                                                <button onClick={() => convertUserToAdmin(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b'>
+                                                                <button onClick={() => convertUserToAdmin(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b w-24'>
                                                                     {row.isAdmin ? "عزل مدیر" : "ارتقا به مدیر"}
                                                                 </button>
                                                             </TableCell>
                                                         )}
 
                                                         <TableCell align='center'>
-                                                            <button onClick={() => setUserDetailsOpen(true)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b'> لیست سفارشات</button>
+                                                            <button onClick={() => setUserDetailsOpen(true)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b w-32'> لیست سفارشات</button>
                                                         </TableCell>
 
                                                         {session?.user.isAdmin == "ADMIN" && (
@@ -297,6 +297,6 @@ export async function getServerSideProps({ req }) {
 
 
     return {
-        props: {  }
+        props: {}
     }
 }

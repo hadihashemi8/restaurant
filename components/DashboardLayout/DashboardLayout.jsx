@@ -108,9 +108,7 @@ export default function DashboardLayout({ children }) {
           
       </List>
       <Divider />
-      <div className='text-center mt-2 '>
-        <Button title="صفحه اصلی" to="/" />
-      </div>
+      
 
 
     </Box>

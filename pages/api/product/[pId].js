@@ -41,18 +41,18 @@ export default async function handler(req, res) {
         const { fields, files } = await formData;
 
 
-        // const newObj = {
-        //     name: fields?.name[0],
-        //     price: fields?.price[0],
-        //     aboutProduct: fields?.aboutProduct[0],
-        //     aboutProductFull: fields?.aboutProductFull[0],
-        //     categories: fields?.categories[0],
-        //     image: "file" in files ? files.file[0].filepath : fields.file[0]
-        // }
+        const newObj = {
+            name: fields?.name[0],
+            price: fields?.price[0],
+            aboutProduct: fields?.aboutProduct[0],
+            aboutProductFull: fields?.aboutProductFull[0],
+            categories: fields?.categories[0],
+            image: "file" in files ? files.file[0].filepath : fields.file[0]
+        }
 
-        // await Product.findByIdAndUpdate(pId, newObj)
+        await Product.findByIdAndUpdate(pId, newObj)
 
-        // res.status(201).json({ msg: "product updated" })
+        res.status(201).json({ msg: "product updated" })
     } else if (req.method == "GET") {
 
         const items = await Product.find()

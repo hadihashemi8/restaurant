@@ -38,7 +38,8 @@ export default function UserDetails({ userInfo, transAction }) {
             <div>
                 <Paper dir="rtl" sx={{ width: '100%', overflow: 'hidden', marginTop: '24px' }}>
                     <TableContainer sx={{ maxHeight: 440 }}>
-                        <Table stickyHeader aria-label="sticky table">
+
+                        <Table className="hidden md:block" stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column) => (
@@ -80,6 +81,81 @@ export default function UserDetails({ userInfo, transAction }) {
 
                             </TableBody>
                         </Table>
+
+                        <Table className="md:hidden" stickyHeader aria-label="sticky table">
+
+                            <TableRow>
+
+                                <TableCell
+                                    className="table-thead "
+                                   
+                                    align="center"
+                                    style={{ minWidth: 100, textAlign: "center" }}
+                                >
+                                    نام کاربر :
+                                </TableCell>
+
+                                <TableCell align="right">
+                                    {userInfo?.fullName}
+                                </TableCell>
+
+                            </TableRow>
+
+                            <TableRow>
+
+                                <TableCell
+                                    className="table-thead"
+
+                                    align="center"
+                                    style={{ minWidth: 150, textAlign: "center" }}
+                                >
+                                    شماره تلفن :
+                                </TableCell>
+
+                                <TableCell align='right'>
+                                    {userInfo?.phoneNumber}
+
+                                </TableCell>
+
+                            </TableRow>
+
+                            <TableRow>
+
+                                <TableCell
+                                    className="table-thead"
+
+                                    align="center"
+                                    style={{ minWidth: 150, textAlign: "center" }}
+                                >
+                                    نقش کاربر :
+                                </TableCell>
+
+                                <TableCell align='right'>
+                                    {userInfo?.isAdmin == "ADMIN" ? "مدیر اصلی" : userInfo?.isAdmin ? "ادمین" : "کاربر"}
+                                </TableCell>
+
+                            </TableRow>
+
+                            <TableRow>
+
+                                <TableCell
+                                    className="table-thead"
+
+                                    align="center"
+                                    style={{ minWidth: 150, textAlign: "center" }}
+                                >
+                                    مجموع تراکنش : 
+                                </TableCell>
+
+                                {transAction && (
+                                    <TableCell align='right'>
+                                        -
+                                    </TableCell>
+                                )}
+
+                            </TableRow>
+                        </Table>
+
                     </TableContainer>
 
                 </Paper>

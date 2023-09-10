@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import Button from '../Button/Button'
-
+import Loader from "../Loader/Loader"
 
 const LastProductsTable = () => {
 
@@ -23,7 +23,9 @@ const LastProductsTable = () => {
     }, [productsNumber])
 
     return (
-        <div className=' w-full   flex flex-col items-center justify-start  h-72  '>
+        <>
+        {products.length > 0 ? (
+            <div className=' w-full   flex flex-col items-center justify-start  h-full lg:h-72  '>
             <h2 className='text-xl'>آخرین محصولات ثبت شده</h2>
 
             <div className='mt-4 flex items-center justify-start w-full'>
@@ -39,9 +41,9 @@ const LastProductsTable = () => {
 
                     <thead className='bg-main-color4 border-b-[1px] border-main-color1'>
                         <tr>
-                            <th className='p-4 border-1 '>عکس محصول</th>
-                            <th className='p-4 border-1 '>نام محصول</th>
-                            <th className='p-4 border-1 '>قیمت محصول</th>
+                            <th className='p-4 border-1'>عکس محصول</th>
+                            <th className='p-4 border-1'>نام محصول</th>
+                            <th className='p-4 border-1'>قیمت محصول</th>
                         </tr>
                     </thead>
 
@@ -66,6 +68,11 @@ const LastProductsTable = () => {
             </div>
 
         </div>
+        ) : (
+            <Loader/>
+        )}
+        </>
+        
     )
 }
 

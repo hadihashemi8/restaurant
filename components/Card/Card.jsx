@@ -40,7 +40,7 @@ export default function Card({ offerCard, data }) {
         <>
             <div onClick={() => setDetailsModal(true)} className={`w-full h-full p-2 group rounded-xl max-w-sm mx-auto relative flex items-start flex-col cursor-pointer ${offerCard ? "bg-main-color5" : "bg-main-color4 border-[1px] border-gray-400 text-main-color1 shadow-[0_0_2px_rgba(0,0,0,0.4)]"}`}>
                 <div className="w-full h-60 bg-red-100  relative rounded-xl overflow-hidden ">
-                    <Image className="group-hover:scale-110 duration-300 " loading="lazy" src="/images/foods/food-1.jpg" alt="food-img" fill sizes="100%" style={{ objectFit: "cover" }} />
+                    <Image className="group-hover:scale-110 duration-300 " loading="lazy" src={`/images/foods/food-1.jpg`} alt="food-img" fill sizes="100%" style={{ objectFit: "cover" }} />
 
                 </div>
                 <div className=" flex flex-col items-start w-full text-res-600">

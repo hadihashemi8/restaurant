@@ -22,41 +22,48 @@ export default function ContactUs() {
                     <div className=" md:w-1/2 relative flex items-center justify-center ">
                         <Image width={500} height={500} className="bg-main-color4" src="/images/contact-us.png" alt="logo" />
                     </div>
-                    <div className="flex items-center md:w-1/2  justify-center mt-4 sm:mt-0 ">
-                        <div className="flex flex-col items-center lg:w-3/4">
+                    <div className="flex items-center flex-col  sm:w-2/3  justify-center mt-4 sm:mt-0 ">
+                        <div className="flex flex-col items-center ">
                             <h2 className="text-2xl md:text-4xl self-start mt-5">رستوران نمونه</h2>
-                            <p className="text-justify mt-4">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک.</p>
+                            <p className="text-justify mt-4">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک.
+                            </p>
 
-                            {isClient && (
-                                <table className="mt-10 w-full border-spacing-y-2 border-separate">
-                                    <tr className="cursor-default ">
-                                        <th className="text-start border-r-2 border-main-color1 text-sm mx-1 p-2  ">شماره تماس : </th>
-                                        <td className="text-center text-sm mx-1 p-2 ">
-                                            09111111111
-                                            <br/>
-                                            09111111111
-                                        </td>
-                                  
-                                    </tr>
-                                    <tr className="cursor-default ">
-                                        <th className="text-start border-r-2 border-main-color1 text-sm mx-1 p-2  ">شبکه های مجازی : </th>
-                                        <td className="text-center text-sm mx-1 p-2 ">instagram<br/>
-                                        telegram
-                                        </td>
-                                       
-                                    </tr>
-                                    <tr className="cursor-default ">
-                                        <th className="text-start border-r-2 border-main-color1 text-sm mx-1 p-2  ">ایمیل : </th>
-                                        <td className="text-center  text-sm  mx-1 p-2 ">thisIsEmail@gmail.com</td>
-                                    </tr>
-                                    <tr className="cursor-default ">
-                                        <th className="text-start border-r-2 border-main-color1 text-sm mx-1 p-2  ">آدرس : </th>
-                                        <td className="text-center  text-sm  mx-1 p-2 ">این یک آدرس تستی است</td>
-                                    </tr>
-                                </table>
-                            )}
+                        
+                        </div>
+                        <div className="w-full  mt-10 grid grid-cols-1 md:grid-cols-2 p-2 gap-2">
 
+                            <div className="p-2 flex flex-col items-center justify-between rounded-xl bg-white col-span-1 shadow-[0_0_5px_rgba(0,0,0,0.3)]">
+                                <p className="text-sm ">شماره تماس :</p>
+                                <div className="mt-2 flex items-center justify-evenly w-full ">
+                                <p className="md:xs lg:base">09111111111</p>
+                                <p className="md:xs lg:base">09111111111</p>
+                                
+                                </div>
+                            </div>
 
+                            <div className="p-2 flex flex-col items-center justify-between rounded-xl bg-white col-span-1 shadow-[0_0_5px_rgba(0,0,0,0.3)]">
+                                <p className="text-sm " >شبکه های مجازی :</p>
+                                <div className="mt-2 flex items-center justify-evenly w-full">
+                                <p>instagram</p>
+                                <p>telegram</p>
+                                </div>
+                            </div>
+
+                            <div className="p-2 flex flex-col items-center justify-between rounded-xl bg-white col-span-1 shadow-[0_0_5px_rgba(0,0,0,0.3)]">
+                                <p className="text-sm " >ایمیل :</p>
+                                <div className="mt-2 flex items-center justify-evenly w-full">
+                                <p>thisIsEmail@gmail.com</p>
+                                
+                                </div>
+                            </div>
+
+                            <div className="p-2 flex flex-col items-center justify-between rounded-xl bg-white col-span-1 shadow-[0_0_5px_rgba(0,0,0,0.3)]">
+                                <p className="text-sm " >آدرس :</p>
+                                <div className="mt-2 flex items-center justify-evenly w-full">
+                                <p> این یک آدرس تستی است </p>
+                               
+                                </div>
+                            </div>
                         </div>
 
 

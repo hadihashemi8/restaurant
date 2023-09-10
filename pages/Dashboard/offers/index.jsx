@@ -139,7 +139,7 @@ export default function Offers() {
       cancelButtonColor: "#EE4041",
       confirmButtonText: "بله",
       confirmButtonColor: "#025464",
-      reverseButtons: true
+      
     }).then(res => {
       if (res.isConfirmed) {
 
@@ -208,14 +208,14 @@ export default function Offers() {
                             <TableCell align='center'>
                               {row.price}
                             </TableCell>
-                            <TableCell align='center'>
-                              <p className="bg-main-color5 rounded-lg text-main-color4 p-1 ">
+                            <TableCell align='center '>
+                              <p className="bg-main-color5 text-center rounded-lg text-main-color4 p-1 w-42">
                                 {row.offerPresent} %
                               </p>
                             </TableCell>
 
-                            <TableCell align='center'>
-                              <p className="bg-green-400 rounded-lg text-main-color4 p-1 ">
+                            <TableCell align='center '>
+                              <p className="bg-green-400 text-center rounded-lg text-main-color4 p-1 w-42">
                                 {(row.price - (row.offerPresent * row.price) / 100) == 0 ? "رایگان" : `${(row.price - (row.offerPresent * row.price) / 100)} تومان`}
                               </p>
                             </TableCell>

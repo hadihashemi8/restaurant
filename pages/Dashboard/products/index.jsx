@@ -272,13 +272,13 @@ export default function Products() {
                               <button onClick={() => editeHandler(row.id)} className='bg-main-color1 py-1 px-2 rounded-md text-main-color4 r-b'>ویرایش</button>
                             </TableCell>
                             <TableCell align='center'>
-                              <button onClick={() => openOfferMenue(row.id)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b'>اعمال تخفیف</button>
+                              <button onClick={() => openOfferMenue(row.id)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b w-24'>اعمال تخفیف</button>
                             </TableCell>
                             <TableCell align='center'>
-                              <button onClick={() => addToOfferMenue(row.id)} className={`${row.ourOffer ? "bg-green-500" : "bg-main-color5"} py-1 px-2 rounded-md text-main-color4 r-b`}>{row.ourOffer ? "حذف از پیشنهادها" : "افزودن به پیشنهاها"}</button>
+                              <button onClick={() => addToOfferMenue(row.id)} className={`w-32 ${row.ourOffer ? "bg-green-500" : "bg-main-color5"} py-1 px-2 rounded-md text-main-color4 r-b`}>{row.ourOffer ? "حذف از پیشنهادها" : "افزودن به پیشنهاها"}</button>
                             </TableCell>
                             <TableCell align='center'>
-                              <button onClick={() => removeProductHandler(row.id)} className='bg-main-color5 py-1 px-2 rounded-md text-main-color4 r-b'>حذف</button>
+                              <button onClick={() => removeProductHandler(row.id)} className='bg-main-color5 py-1 px-2 rounded-md text-main-color4 '>حذف</button>
                             </TableCell>
                           </TableRow>
                         );

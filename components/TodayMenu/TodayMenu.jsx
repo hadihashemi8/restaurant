@@ -8,16 +8,18 @@ import 'swiper/css/pagination';
 import Card from "../Card/Card";
 import Button from "../Button/Button";
 import useFetch from "../../hooks/useFetch";
+import { useEffect } from "react";
 
 export default function TodayMenu() {
 
     const { data, loading, error, isRefresh } = useFetch("/api/product/ourOffer")
 
+    
 
 
     return (
         <>
-            {data?.length ?
+            {data?.length > 0 && (
                 <div className="p-4 pt-20 flex items-center justify-center   ">
                     <div className="flex flex-col items-center justify-between w-full">
                         <div className="flex items-center justify-center w-full">
@@ -68,7 +70,7 @@ export default function TodayMenu() {
                         </div>
                     </div>
                 </div>
-                : null}
+                )}
         </>
     )
 }

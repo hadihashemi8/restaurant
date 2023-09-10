@@ -66,6 +66,7 @@ export default async function handler(req, res) {
 
         await Product.find()
             .then(products => {
+                console.log(products);
                 if (products) {
 
                     if (offset) {

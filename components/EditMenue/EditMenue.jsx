@@ -43,7 +43,7 @@ export default function EditMenue({ product , closeEditModal,isRefresh}) {
                 formData.append("file", file)
                 formData.append("categories", values.categories)
 
-                axios.put(`http://localhost:3000/api/product/${product._id}`, formData)
+                axios.put(`/api/product/${product._id}`, formData)
                     .then(res => {
                         if(res.status == 201){
                             toast.success("محصول بروزرسانی شد", {
