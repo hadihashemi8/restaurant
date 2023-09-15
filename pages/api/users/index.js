@@ -22,9 +22,8 @@ async function handler(req, res) {
 
         const usersCount = await User.countDocuments({}).exec()
 
-        console.log(usersCount);
 
-        User.create({ fullName, phoneNumber, password: await hash(password, 12), comments: [], isAdmin: usersCount == 0 ? "ADMIN" : false })
+        User.create({ fullName, phoneNumber, password: await hash(password, 12), orders: [], isAdmin: usersCount == 0 ? "ADMIN" : false })
             .then(data => {
                 if (data) {
                     res.status(201).json({ status: true, user: data })
@@ -33,7 +32,7 @@ async function handler(req, res) {
             .catch(err => res.status(404).json({ err }))
 
     } else if (req.method === "GET") {
-        const data = await User.find()
+        await User.find()
             .then(users => {
                 if (users) {
                     res.status(201).json({ status: true, data: users })
@@ -41,7 +40,7 @@ async function handler(req, res) {
                 }
             }).catch(err => res.status(404).join({ err }))
     } else {
-        res.status(500).json({ message: "htttp method not valid only POST Accepted" })
+        res.status(500).json({ message: "htttp method not valid only POST || GET Accepted" })
     }
 
 

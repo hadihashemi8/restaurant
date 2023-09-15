@@ -1,17 +1,20 @@
-import { Avatar } from '@mui/material'
+import { Avatar, formControlLabelClasses } from '@mui/material'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import axios from "axios"
 import { toast } from "react-toastify"
-import Swal from 'sweetalert2'
+import { useDispatch } from 'react-redux'
+import { addToList } from '../../redux/slices/ordersSlice'
 
-export default function ProductDetailsModal({ infos, offerCard }) {
+
+export default function ProductDetailsModal({ infos, offerCard , setDetailsModal }) {
 
     const { data: session } = useSession()
     const [comment, setComment] = useState('')
 
+    const dispatch = useDispatch()
 
 
     const handleComment = (e) => {
@@ -58,12 +61,32 @@ export default function ProductDetailsModal({ infos, offerCard }) {
 
     }
 
+    const addToOrders = () => {
+        const product = {
+            id: infos._id,
+            title: infos.name,
+            price: infos.price,
+            image: infos.image,
+            offerPresent: infos.offerPresent,
+            qty: 1,
+
+        }
+
+        dispatch(addToList(product))
+        setDetailsModal(false)
+        toast.success("لیست سفارشات بروزرسانی شد", {
+            position: "top-center",
+            hideProgressBar: "true",
+            autoClose: 1500,
+            theme: "colored"
+        })
+    }
 
     return (
         <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
 
             <div className='col-span1  lg:p-5  flex items-center justify-center h-80 '>
-                <div className='relative w-full h-64 rounded-xl overflow-hidden'>
+                <div className='relative w-full h-full rounded-xl overflow-hidden'>
                     <Image src="/images/foods/food-1.jpg" fill sizes='100%' style={{ objectFit: "cover" }} alt="product-img" />
                 </div>
             </div>
@@ -86,7 +109,7 @@ export default function ProductDetailsModal({ infos, offerCard }) {
                     <p className='mt-2 text-justify h-24 overflow-y-scroll'>
                         {infos?.aboutProductFull}
                     </p>
-                    <button className='py-2 px-4 rounded-xl bg-main-color5 text-white w-full mt-4'>
+                    <button onClick={addToOrders} className='py-2 px-4 rounded-xl bg-main-color5 text-white w-full mt-4'>
                         سفارش
                     </button>
                 </div>

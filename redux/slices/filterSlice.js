@@ -10,30 +10,9 @@ const initialState = {
 }
 
 
-// export const fetchProducts = createAsyncThunk("products/fetchProducts", () => {
-//     return axios.get("/api/product")
-//         .then(response => response.data)
-// })
-
 const filterSlice = createSlice({
     name: "filter",
     initialState,
-    // extraReducers: (builder) => {
-    //     builder.addCase(fetchProducts.pending , (state) => {
-    //         state.isLoading = true
-    //     })
-    //     builder.addCase(fetchProducts.fulfilled , (state , action) => {
-    //         state.isLoading = false
-    //         state.products = action.payload
-    //         state.err = ""
-    //     })
-    //     builder.addCase(fetchProducts.rejected , (state ,action) => {
-    //         state.isLoading = false
-    //         state.products = []
-    //         state.err = action.error.message
-
-    //     })
-    // },
     reducers: {
         filterProducts: (state, action) => {
             const items = action.payload.items

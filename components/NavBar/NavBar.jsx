@@ -18,13 +18,14 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import InfoIcon from '@mui/icons-material/Info';
 import PhoneEnabledIcon from '@mui/icons-material/PhoneEnabled';
 import { useRouter } from 'next/router';
-
+import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
 
 const sideBarItems = [
     { id: 1, title: "خانه", to: "/", icon: <AppsIcon /> },
     { id: 2, title: "منوی غذا", to: "/FoodsMenue", icon: <RestaurantIcon /> },
     { id: 3, title: "درباره ما", to: "/#About-us", icon: <InfoIcon /> },
     { id: 4, title: "تماس با ما", to: "/#Contect-us", icon: <PhoneEnabledIcon /> },
+    { id: 4, title: "سفارشات", to: "?Cart=open", icon: <PlaylistAddCheckCircleIcon /> },
 
 ]
 
@@ -35,13 +36,10 @@ export default function NavBar() {
 
     const router = useRouter()
 
+    useEffect(() => {
+        console.log(session);
+    }, [session])
 
-    const toggleDrawer = (open) => {
-        setShowSideBar(open);
-    };
-
-
-   
 
     const list = () => (
         <Box
@@ -95,7 +93,12 @@ export default function NavBar() {
                         </span>
                         <RestaurantIcon className="mr-2" />
                     </Link>
-
+                    <Link className="ml-6 p-2 py-4 relative menu-item text-main-color4 w-[120px]  flex items-center justify-center" href="?Cart=open">
+                        <span>
+                            سفارشات
+                        </span>
+                        <PlaylistAddCheckCircleIcon className="mr-2" />
+                    </Link>
                     <Link className="ml-6 p-2 py-4 relative menu-item text-main-color4 w-[120px]  flex items-center justify-center" href="#About-us">
                         <span>
                             درباره ما
@@ -108,19 +111,21 @@ export default function NavBar() {
                         </span>
                         <PhoneEnabledIcon className="mr-2" />
                     </Link>
+
                 </ul>
 
 
                 <div>
                     {
                         <>
-                            <button className="flex lg:hidden text-main-color4 " onClick={() => toggleDrawer(true)}>
+                            <button className="flex lg:hidden text-main-color4 " onClick={() => setShowSideBar(true)}>
                                 <MenuIcon className="text-3xl" />
                             </button>
                             <Drawer
+                               className='z-30'
                                 anchor="right"
                                 open={showSideBar}
-                                onClose={() => toggleDrawer(false)}
+                                onClose={() => setShowSideBar(false)}
                             >
                                 {list()}
                             </Drawer>

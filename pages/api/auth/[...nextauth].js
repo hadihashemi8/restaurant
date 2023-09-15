@@ -16,7 +16,7 @@ export default NextAuth({
                     ...token,
                     id: user._id.toString(),
                     phoneNumber: user.phoneNumber,
-                    comments: user.comments,
+                    orders: user.orders,
                     isAdmin: user.isAdmin
                 }
             }
@@ -31,7 +31,7 @@ export default NextAuth({
                     ...session.user,
                     id: token.id,
                     phoneNumber: token.phoneNumber,
-                    comments: token.comments,
+                    orders: token.orders,
                     isAdmin: token.isAdmin
                 }
             }
@@ -57,7 +57,7 @@ export default NextAuth({
                         _id: user._id,
                         name: user.fullName,
                         phoneNumber: user.phoneNumber,
-                        comments: user.comments,
+                        orders: user.orders,
                         isAdmin: user.isAdmin,
 
                     }

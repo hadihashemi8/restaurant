@@ -251,7 +251,7 @@ export default function FoodsMenue() {
                                     </AccordionDetails>
                                 </Accordion>
 
-                                <Accordion className="mt-4 rounded-md w-full  overflow-hidden">
+                                {/* <Accordion className="mt-4 rounded-md w-full  overflow-hidden">
                                     <AccordionSummary
                                         className="rounded-md "
                                         expandIcon={<ExpandMoreIcon />}
@@ -274,7 +274,7 @@ export default function FoodsMenue() {
                                         </Box>
                                         <p className='mt-4'>{value[1]} تومان - {value[0]} تومان</p>
                                     </AccordionDetails>
-                                </Accordion>
+                                </Accordion> */}
 
                                 <button onClick={filterHandler} className='bg-main-color5 py-2 rounded-md w-full mt-4 text-main-color4'>اعمال فیلتر</button>
                             </div>
@@ -303,7 +303,7 @@ export default function FoodsMenue() {
                                         ))
                                     ) : (
                                         <div className='col-span-3 flex flex-col items-center '>
-                                        <Image src="/images/not-found-search.jpg" width={400} height={400} />
+                                        <Image src="/images/not-found-search.jpg" width={400} height={400} alt="not found"/>
                                             <p className='text-lg mt-4'>
                                                 محصول مورد نظر موجود ندارد
                                             </p>

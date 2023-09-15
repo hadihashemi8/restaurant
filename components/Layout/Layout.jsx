@@ -1,5 +1,3 @@
-import Link from "next/link"
-import styles from "../../styles/Home.module.css"
 import Button from "../Button/Button"
 
 // import wave from "../../public/images/svg/wave-haikei.png"
@@ -10,27 +8,42 @@ import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { Drawer } from "@mui/material"
+import Orders from "../Cart/Orders"
+import { useSearchParams } from "next/navigation"
+import { useSelector } from "react-redux";
 
 const NavBar = dynamic(() => import("../NavBar/NavBar"), { ssr: false })
 
 
 export default function Layout({ children }) {
 
+    const selector = useSelector(state => state.ordersList)
+
+
     const router = useRouter()
     const [path, setPath] = useState('')
 
+    const searchParams = useSearchParams()
+    const showBasket = searchParams.get('Cart')
+
 
     useEffect(() => {
-       
         setPath(router.pathname)
     }, [router])
 
+    useEffect(() => {
+        if (selector.items.length > 0) {
 
+            router.push('?Cart=open')
+        }
+        console.log(selector);
+    }, [selector])
 
 
     return (
         <div className="max-w-screen-2xl  min-h-screen mx-auto bg-main-color4 relative" >
-      <ToastContainer className="text-center font " />
+            <ToastContainer className="text-center font z-50" />
 
             <header >
                 <NavBar />
@@ -50,11 +63,21 @@ export default function Layout({ children }) {
 
                     <img className=" w-full absolute -bottom-1 left-0 " src="/images/svg/wave-haikei.png" alt="wave" />
                 </div>
+
+                <Drawer
+                    className="relative z-40"
+                    anchor="left"
+                    open={showBasket == "open"}
+                    onClose={() => router.push("", { scroll: true })}
+                >
+                    <Orders />
+                </Drawer>
+
             </header>
             <div className="container mx-auto">
                 {children}
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

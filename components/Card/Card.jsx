@@ -6,17 +6,20 @@ import { Box, Modal, Rating } from "@mui/material";
 import styles from '../../styles/Home.module.css'
 import Link from "next/link";
 import ProductDetailsModal from "../ProductDetailsModal/ProductDetailsModal";
-
+import { useDispatch } from "react-redux";
+import { addToList, removeFromList } from "../../redux/slices/ordersSlice";
+import { toast } from "react-toastify";
 
 
 
 export default function Card({ offerCard, data }) {
 
+    const dispatch = useDispatch()
+
     const [showOfferBanner, setShowOfferBanner] = useState(false)
     const [detailsModal, setDetailsModal] = useState(false)
 
     useEffect(() => {
-
 
         window.addEventListener("scroll", () => {
             if (window.scrollY >= 700) {
@@ -25,15 +28,29 @@ export default function Card({ offerCard, data }) {
         })
     }, [])
 
-    useEffect(() => {
-        console.log(data);
-    } , [data])
-
 
     const addToCard = (e) => {
-        e.stopPropagation()
 
+        const product = {
+            id: data._id,
+            title: data.name,
+            price: data.price,
+            image: data.image,
+            offerPresent: data.offerPresent,
+            qty: 1,
+
+        }
+
+        e.stopPropagation()
+        dispatch(addToList(product))
+        toast.success("لیست سفارشات بروزرسانی شد", {
+            position: "top-center",
+            hideProgressBar: "true",
+            autoClose: 1500,
+            theme: "colored"
+        })
     }
+
 
 
     return (
@@ -76,14 +93,14 @@ export default function Card({ offerCard, data }) {
 
 
             <Modal
-            
+
                 open={detailsModal}
                 onClose={() => setDetailsModal(false)}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   rounded-xl w-[80%] bg-white p-4 ">
-                    <ProductDetailsModal infos={data} offerCard={offerCard}/>
+                <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   rounded-xl w-[80%] bg-white p-4 ">
+                    <ProductDetailsModal infos={data} offerCard={offerCard} setDetailsModal={setDetailsModal} />
                 </Box>
             </Modal>
 

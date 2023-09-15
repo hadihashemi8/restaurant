@@ -95,11 +95,11 @@ export default function DashboardLayout({ children }) {
           userMenueItems.map(item => (
             <Link key={item.id} href={item.to}>
             <ListItem className={`border-4 border-transparent ${router.pathname === item.to ? " border-l-main-color1 text-main-color4" : ""}`} disablePadding>
-                <ListItemButton >
-                  <ListItemIcon>
+                <ListItemButton className='flex items-center justify-between w-full '>
+                  <ListItemText className='text-start' primary={item.title} />
+                  <ListItemIcon dir="ltr">
                     {item.icon}
                   </ListItemIcon>
-                  <ListItemText className='text-end' primary={item.title} />
                 </ListItemButton>
               </ListItem>
             </Link>
