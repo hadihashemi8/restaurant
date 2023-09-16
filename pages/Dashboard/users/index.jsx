@@ -18,43 +18,11 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import Loader from '../../../components/Loader/Loader';
 import Image from 'next/image';
+import OrdersListDetails from '../../../components/OrdersListDetails/OrdersListDetails';
 
 
 
-const columns = [
-    { id: 'name', label: 'نام کاربر', minWidth: 150 },
-    { id: 'phoneNumber', label: 'شماره تلفن', minWidth: 150 },
-    {
-        id: 'datails',
-        label: '',
-        minWidth: 100,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
 
-    {
-        id: 'add-to-admin',
-        label: '',
-        minWidth: 100,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-
-    {
-        id: 'order-list',
-        label: '',
-        minWidth: 100,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'remove',
-        label: '',
-        minWidth: 100,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-];
 
 
 export default function Users() {
@@ -63,12 +31,34 @@ export default function Users() {
 
     const { data, error, loading, isRefresh } = useFetch("/api/users")
     const [rows, setRows] = useState([])
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
+    const [columns, setColumns] = useState([
+        { id: 'name', label: 'نام کاربر', minWidth: 150 },
+        { id: 'phoneNumber', label: 'شماره تلفن', minWidth: 150 },
+        {
+            id: 'datails',
+            label: '',
+            minWidth: 100,
+            align: 'right',
+            format: (value) => value.toLocaleString('en-US'),
+        },
+
+
+
+        {
+            id: 'order-list',
+            label: '',
+            minWidth: 100,
+            align: 'right',
+            format: (value) => value.toLocaleString('en-US'),
+        },
+    ])
 
     const [userInfo, setUserInfo] = useState({})
     const [userDetailsOpen, setUserDetailsOpen] = useState(false)
+    const [ordersListOpen, setOrdersListOpen] = useState(false)
 
 
 
@@ -104,6 +94,17 @@ export default function Users() {
     }
 
 
+    //   show ordersList Section
+
+    const showOrdersList = (rowId) => {
+
+        const ordersList = data.find(item => item._id == rowId).orders
+
+        setUserInfo(ordersList)
+        setOrdersListOpen(true)
+    }
+
+
     // update user to admin section
     const updateUserToAdmin = async (rowId, isAdmin) => {
         const response = await axios.put(`/api/users/${rowId}`, {
@@ -136,12 +137,50 @@ export default function Users() {
             cancelButtonColor: "#EE4041",
             confirmButtonText: "بله",
             confirmButtonColor: "#025464",
-           
+
         }).then(res => {
             if (res.isConfirmed) {
                 updateUserToAdmin(rowId, isAdmin)
             }
         })
+
+    }
+
+
+    // remove user section
+
+    const userRemoveHandler = (rowId) => {
+
+        Swal.fire({
+            title: "این کاربر حذف شود؟",
+            icon: "question",
+            showCancelButton: "true",
+            cancelButtonText: "لغو",
+            cancelButtonColor: "#EE4041",
+            confirmButtonText: "بله",
+            confirmButtonColor: "#025464",
+
+        }).then(res => {
+            if(res.isConfirmed){
+                axios.delete(`/api/users/${rowId}`)
+                .then(response => {
+                    if(response.status == 201){
+                        toast.success("کاربر با موفقیت حذف شد", {
+                            position: "top-center",
+                            hideProgressBar: "true",
+                            autoClose: 1500,
+                            theme: "colored"
+            
+                        })
+                        isRefresh()
+                    }
+                })
+            }
+        })
+
+
+
+
 
     }
 
@@ -152,15 +191,22 @@ export default function Users() {
     useEffect(() => {
         if (session?.user.isAdmin !== "ADMIN") {
 
-            const indexUpdateBtn = columns.findIndex(item => item.id == "add-to-admin")
-            columns.splice(indexUpdateBtn, 1)
-
-            const indexRemoveBtn = columns.findIndex(item => item.id == "remove")
-            columns.splice(indexRemoveBtn, 1)
-
-            console.log(columns);
+            setColumns(prev => [...prev, {
+                id: 'add-to-admin',
+                label: '',
+                minWidth: 100,
+                align: 'right',
+                format: (value) => value.toLocaleString('en-US'),
+            },
+            {
+                id: 'remove',
+                label: '',
+                minWidth: 100,
+                align: 'right',
+                format: (value) => value.toLocaleString('en-US'),
+            },])
         }
-    }, [])
+    }, [session])
 
 
 
@@ -179,7 +225,8 @@ export default function Users() {
                                         <TableRow>
                                             {columns.map((column) => (
                                                 <TableCell
-                                                    className="table-thead"
+                                                    className="table-thead
+                                                    "
                                                     key={column.id}
                                                     align={column.align}
                                                     style={{ minWidth: column.minWidth, textAlign: "center" }}
@@ -215,11 +262,11 @@ export default function Users() {
                                                         )}
 
                                                         <TableCell align='center'>
-                                                            <button onClick={() => setUserDetailsOpen(true)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b w-32'> لیست سفارشات</button>
+                                                            <button onClick={() => showOrdersList(row.id)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b w-32'> لیست سفارشات</button>
                                                         </TableCell>
 
                                                         {session?.user.isAdmin == "ADMIN" && (
-                                                            <TableCell align='center'>
+                                                            <TableCell align='center' onClick={() => userRemoveHandler(row.id)}>
                                                                 <button className='bg-main-color5 py-1 px-2 rounded-md text-main-color4 r-b'>حذف</button>
                                                             </TableCell>
                                                         )}
@@ -264,6 +311,20 @@ export default function Users() {
                         <UserDetails userInfo={userInfo} transAction={true} />
                     </Box>
                 </Modal>
+
+                <Modal
+
+                    open={ordersListOpen}
+                    onClose={() => setOrdersListOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2   rounded-xl bg-white p-4 ">
+
+                        <OrdersListDetails userInfo={userInfo} />
+                    </Box>
+                </Modal>
+
             </div>
         </DashboardLayout>
     )

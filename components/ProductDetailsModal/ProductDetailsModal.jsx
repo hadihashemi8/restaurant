@@ -62,24 +62,32 @@ export default function ProductDetailsModal({ infos, offerCard , setDetailsModal
     }
 
     const addToOrders = () => {
-        const product = {
-            id: infos._id,
-            title: infos.name,
-            price: infos.price,
-            image: infos.image,
-            offerPresent: infos.offerPresent,
-            qty: 1,
-
+        if(!session){
+            toast.warn( "برای سفارش وارد شوید", {
+                position: "top-center",
+                hideProgressBar: "true",
+                autoClose: 1500,
+                theme: "colored"
+            })
+        }else{
+            const product = {
+                id: data._id,
+                title: data.name,
+                price: data.price,
+                image: data.image,
+                offerPresent: data.offerPresent,
+                qty: 1,
+    
+            }
+    
+            dispatch(addToList(product))
+            toast.success("لیست سفارشات بروزرسانی شد", {
+                position: "top-center",
+                hideProgressBar: "true",
+                autoClose: 1500,
+                theme: "colored"
+            })
         }
-
-        dispatch(addToList(product))
-        setDetailsModal(false)
-        toast.success("لیست سفارشات بروزرسانی شد", {
-            position: "top-center",
-            hideProgressBar: "true",
-            autoClose: 1500,
-            theme: "colored"
-        })
     }
 
     return (

@@ -33,7 +33,7 @@ const OrderForm = ({ setOpenOrderModal }) => {
             const newTransAction = {
                 id: Date.now(),
                 order: [...selector.items.map(item => item)],
-                details: { customer, phone, address, status: !orderStatus, total: selector.total }
+                details: { customer, phone, address, status: !orderStatus, total: selector.total , createdAt: new Date().toLocaleDateString("fa-ir") }
             }
 
 

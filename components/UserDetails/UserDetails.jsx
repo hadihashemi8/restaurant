@@ -19,14 +19,24 @@ export default function UserDetails({ userInfo, transAction }) {
             align: 'right',
             format: (value) => value.toLocaleString('en-US'),
         },
-        transAction && {
-            id: 'total-transaction',
-            label: 'مجموع تراکنش',
-            minWidth: 150,
-            align: 'right',
-            format: (value) => value.toLocaleString('en-US'),
-        },
+
     ])
+
+    
+
+
+
+    useEffect(() => {
+        if (transAction) {
+            setColumns(prev => [...prev, {
+                id: 'total-transaction',
+                label: 'مجموع تراکنش',
+                minWidth: 150,
+                align: 'right',
+                format: (value) => value.toLocaleString('en-US'),
+            },])
+        }
+    }, [])
 
 
     return (
@@ -71,7 +81,12 @@ export default function UserDetails({ userInfo, transAction }) {
                                     </TableCell>
                                     {transAction && (
                                         <TableCell align='center'>
-                                            -
+                                            {userInfo?.orders.reduce((acc, cur) => {
+                                                if (cur.details.status) {
+                                                    return acc + cur.details.total
+                                                }
+                                                return acc.details.total
+                                            })} تومان
                                         </TableCell>
                                     )}
 
@@ -88,7 +103,7 @@ export default function UserDetails({ userInfo, transAction }) {
 
                                 <TableCell
                                     className="table-thead "
-                                   
+
                                     align="center"
                                     style={{ minWidth: 100, textAlign: "center" }}
                                 >
@@ -144,12 +159,17 @@ export default function UserDetails({ userInfo, transAction }) {
                                     align="center"
                                     style={{ minWidth: 150, textAlign: "center" }}
                                 >
-                                    مجموع تراکنش : 
+                                    مجموع تراکنش :
                                 </TableCell>
 
                                 {transAction && (
                                     <TableCell align='right'>
-                                        -
+                                        {userInfo?.orders.reduce((acc, cur) => {
+                                            if (cur.details.status) {
+                                                return acc + cur.details.total
+                                            }
+                                            return acc.details.total
+                                        })} تومان
                                     </TableCell>
                                 )}
 

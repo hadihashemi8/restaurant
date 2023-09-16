@@ -22,6 +22,17 @@ export default async function handler(req, res) {
         const slicedItems = items.slice(-uId)
 
         res.status(201).json({ status: true, data: slicedItems })
+    } else if (req.method == "DELETE") {
+
+        await User.findByIdAndDelete({ _id: uId })
+            .then(response => {
+                if (response) {
+                    res.status(201).json({ msg: "user deleted:)" })
+
+                }
+            })
+
+
     }
 
 }

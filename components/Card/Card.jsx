@@ -9,10 +9,13 @@ import ProductDetailsModal from "../ProductDetailsModal/ProductDetailsModal";
 import { useDispatch } from "react-redux";
 import { addToList, removeFromList } from "../../redux/slices/ordersSlice";
 import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 
 
 export default function Card({ offerCard, data }) {
+
+    const { data: session } = useSession()
 
     const dispatch = useDispatch()
 
@@ -31,24 +34,34 @@ export default function Card({ offerCard, data }) {
 
     const addToCard = (e) => {
 
-        const product = {
-            id: data._id,
-            title: data.name,
-            price: data.price,
-            image: data.image,
-            offerPresent: data.offerPresent,
-            qty: 1,
-
+        e.stopPropagation()
+        if(!session){
+            toast.warn( "برای سفارش وارد شوید", {
+                position: "top-center",
+                hideProgressBar: "true",
+                autoClose: 1500,
+                theme: "colored"
+            })
+        }else{
+            const product = {
+                id: data._id,
+                title: data.name,
+                price: data.price,
+                image: data.image,
+                offerPresent: data.offerPresent,
+                qty: 1,
+    
+            }
+    
+            dispatch(addToList(product))
+            toast.success("لیست سفارشات بروزرسانی شد", {
+                position: "top-center",
+                hideProgressBar: "true",
+                autoClose: 1500,
+                theme: "colored"
+            })
         }
 
-        e.stopPropagation()
-        dispatch(addToList(product))
-        toast.success("لیست سفارشات بروزرسانی شد", {
-            position: "top-center",
-            hideProgressBar: "true",
-            autoClose: 1500,
-            theme: "colored"
-        })
     }
 
 
