@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import Button from '../Button/Button'
+import Loader from '../Loader/Loader'
 
 
 
@@ -23,12 +24,14 @@ const LastUserTable = () => {
 
 
 
-        // console.log();
+       
 
     }, [userNumber])
 
     return (
-        <div className=' w-full   flex flex-col items-center justify-start  h-80 lg:h-72  '>
+        <>
+        {users.length > 0  ? (
+            <div className=' w-full   flex flex-col items-center justify-start  h-80 lg:h-72  '>
             <h2 className='text-xl'>آخرین کاربران ثبت شده</h2>
 
             <div className='mt-4 flex items-center justify-start w-full'>
@@ -67,6 +70,10 @@ const LastUserTable = () => {
                 <Button title="مشاهده همه" to="/Dashboard/users" />
             </div>
         </div>
+        ) : (
+            <Loader/>
+        )}
+        </>
     )
 }
 
