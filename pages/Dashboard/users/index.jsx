@@ -149,47 +149,47 @@ export default function Users() {
 
     // remove user section
 
-    const userRemoveHandler = (rowId) => {
+    // const userRemoveHandler = (rowId) => {
 
-        Swal.fire({
-            title: "این کاربر حذف شود؟",
-            icon: "question",
-            showCancelButton: "true",
-            cancelButtonText: "لغو",
-            cancelButtonColor: "#EE4041",
-            confirmButtonText: "بله",
-            confirmButtonColor: "#025464",
+    //     Swal.fire({
+    //         title: "این کاربر حذف شود؟",
+    //         icon: "question",
+    //         showCancelButton: "true",
+    //         cancelButtonText: "لغو",
+    //         cancelButtonColor: "#EE4041",
+    //         confirmButtonText: "بله",
+    //         confirmButtonColor: "#025464",
 
-        }).then(res => {
-            if(res.isConfirmed){
-                axios.delete(`/api/users/${rowId}`)
-                .then(response => {
-                    if(response.status == 201){
-                        toast.success("کاربر با موفقیت حذف شد", {
-                            position: "top-center",
-                            hideProgressBar: "true",
-                            autoClose: 1500,
-                            theme: "colored"
+    //     }).then(res => {
+    //         if(res.isConfirmed){
+    //             axios.delete(`/api/users/${rowId}`)
+    //             .then(response => {
+    //                 if(response.status == 201){
+    //                     toast.success("کاربر با موفقیت حذف شد", {
+    //                         position: "top-center",
+    //                         hideProgressBar: "true",
+    //                         autoClose: 1500,
+    //                         theme: "colored"
             
-                        })
-                        isRefresh()
-                    }
-                })
-            }
-        })
+    //                     })
+    //                     isRefresh()
+    //                 }
+    //             })
+    //         }
+    //     })
 
 
 
 
 
-    }
+    // }
 
 
 
     // check isAdmin 
 
     useEffect(() => {
-        if (session?.user.isAdmin !== "ADMIN") {
+        if (session?.user.isAdmin == "ADMIN") {
 
             setColumns(prev => [...prev, {
                 id: 'add-to-admin',
@@ -198,13 +198,14 @@ export default function Users() {
                 align: 'right',
                 format: (value) => value.toLocaleString('en-US'),
             },
-            {
-                id: 'remove',
-                label: '',
-                minWidth: 100,
-                align: 'right',
-                format: (value) => value.toLocaleString('en-US'),
-            },])
+            // {
+            //     id: 'remove',
+            //     label: '',
+            //     minWidth: 100,
+            //     align: 'right',
+            //     format: (value) => value.toLocaleString('en-US'),
+            // },
+        ])
         }
     }, [session])
 
@@ -265,11 +266,11 @@ export default function Users() {
                                                             <button onClick={() => showOrdersList(row.id)} className='bg-main-color2 py-1 px-2 rounded-md text-main-color4 r-b w-32'> لیست سفارشات</button>
                                                         </TableCell>
 
-                                                        {session?.user.isAdmin == "ADMIN" && (
+                                                        {/* {session?.user.isAdmin == "ADMIN" && (
                                                             <TableCell align='center' onClick={() => userRemoveHandler(row.id)}>
                                                                 <button className='bg-main-color5 py-1 px-2 rounded-md text-main-color4 r-b'>حذف</button>
                                                             </TableCell>
-                                                        )}
+                                                        )} */}
                                                     </TableRow>
                                                 );
                                             })}
