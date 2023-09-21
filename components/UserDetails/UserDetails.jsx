@@ -22,12 +22,13 @@ export default function UserDetails({ userInfo, transAction }) {
 
     ])
 
+
+    
     
 
-
-
     useEffect(() => {
-        if (transAction) {
+        const result = columns.some(item => item.id == "total-transaction")
+        if (transAction && !result) {
             setColumns(prev => [...prev, {
                 id: 'total-transaction',
                 label: 'مجموع تراکنش',
@@ -81,12 +82,12 @@ export default function UserDetails({ userInfo, transAction }) {
                                     </TableCell>
                                     {transAction && (
                                         <TableCell align='center'>
-                                            {userInfo?.orders.reduce((acc, cur) => {
-                                                if (cur.details.status) {
-                                                    return acc + cur.details.total
-                                                }
-                                                return acc.details.total
-                                            })} تومان
+                                            {userInfo.orders.length == 0 ? 0 : userInfo?.orders.reduce((acc, cur) => {
+                                            if (cur.details.status) {
+                                                return acc + cur.details?.total
+                                            }
+                                            return acc
+                                        } , 0)} تومان
                                         </TableCell>
                                     )}
 
@@ -164,12 +165,12 @@ export default function UserDetails({ userInfo, transAction }) {
 
                                 {transAction && (
                                     <TableCell align='right'>
-                                        {userInfo?.orders.reduce((acc, cur) => {
+                                        {userInfo.orders.length == 0 ? 0 : userInfo?.orders.reduce((acc, cur) => {
                                             if (cur.details.status) {
-                                                return acc + cur.details.total
+                                                return acc + cur.details?.total
                                             }
-                                            return acc.details.total
-                                        })} تومان
+                                            return acc
+                                        } , 0)} تومان
                                     </TableCell>
                                 )}
 

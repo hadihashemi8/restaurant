@@ -27,7 +27,7 @@ const UserCard = () => {
             cancelButtonColor: "#EE4041",
             confirmButtonText: "بله",
             confirmButtonColor: "#025464",
-            reverseButtons: true
+            
         }).then(res => {
             if (res.isConfirmed) {
                 Cookies.remove()

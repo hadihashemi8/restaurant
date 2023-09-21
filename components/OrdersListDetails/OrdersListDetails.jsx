@@ -19,7 +19,7 @@ const OrdersListDetails = ({ userInfo }) => {
         setPage(0);
     };
 
-    console.log(userInfo);
+    
 
 
     return (

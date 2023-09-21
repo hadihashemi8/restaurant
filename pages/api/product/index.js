@@ -1,6 +1,9 @@
 import db from "../../../utils/db"
 import Product from "../../../models/product";
 import formidable from "formidable"
+import nextConnect from 'next-connect';
+import multer from "multer"
+
 
 export const config = {
     api: {
@@ -9,6 +12,16 @@ export const config = {
     },
 };
 
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: './public/uploads',
+        filename: (req, file, cb) => cb(null, file.originalname),
+    }),
+});
+
+
+
+
 
 export default async function handler(req, res) {
     await db.connect()
@@ -16,6 +29,8 @@ export default async function handler(req, res) {
 
     const { offset } = req.query
 
+    
+    
     if (req.method == "POST") {
 
         const form = formidable({ multiples: false });
@@ -41,7 +56,7 @@ export default async function handler(req, res) {
                 aboutProductFull: fields.aboutProductFull[0],
                 categories: fields.categories[0],
                 image: files.file[0].filepath,
-                comments:[],
+                comments: [],
                 offerPresent: 0,
                 ourOffer: false
 
@@ -66,7 +81,7 @@ export default async function handler(req, res) {
 
         await Product.find()
             .then(products => {
-                console.log(products);
+               
                 if (products) {
 
                     if (offset) {
@@ -74,7 +89,7 @@ export default async function handler(req, res) {
                         const endSlice = offset
                         const startSlice = endSlice - 10
 
-                        
+
 
                         const sliceProducts = products.slice(startSlice, endSlice)
 
@@ -98,3 +113,5 @@ export default async function handler(req, res) {
         // }
     }
 }
+
+

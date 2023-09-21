@@ -189,7 +189,8 @@ export default function Users() {
     // check isAdmin 
 
     useEffect(() => {
-        if (session?.user.isAdmin == "ADMIN") {
+        const result = columns.some(item => item.id == 'add-to-admin')
+        if (session?.user.isAdmin == "ADMIN" && !result) {
 
             setColumns(prev => [...prev, {
                 id: 'add-to-admin',

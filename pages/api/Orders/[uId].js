@@ -10,10 +10,17 @@ export default async function (req, res) {
 
         const { newTransAction } = req.body
 
-            await User.findByIdAndUpdate(uId, { $push: { orders: newTransAction } })
-            
-            res.status(201).json({msg:"transAction saved"})
-            
-        
+        await User.findByIdAndUpdate(uId, { $push: { orders: newTransAction } })
+
+        res.status(201).json({ msg: "transAction saved" })
+
+
+    } else if (req.method == "GET") {
+
+
+        await User.findById(uId)
+            .then(response => {
+                res.status(200).json({ data: response.orders })
+            })
     }
 }
