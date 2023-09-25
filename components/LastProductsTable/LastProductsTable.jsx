@@ -51,7 +51,7 @@ const LastProductsTable = () => {
                         {products?.reverse().map(item => (
                             <tr key={item.id} className='border-b-[1px] border-gray-200'>
                                 <td className='text-center p-4 flex items-center justify-center'>
-                                    <img className='w-16 h-16' src="/images/foods/food-1.jpg" alt="product" />
+                                    <img className='w-16 h-16' src={item.image} alt="product" />
                                 </td>
                                 <td className='text-center p-4 '>{item.name}</td>
                                 <td className='text-center p-4 '>{item.price}</td>

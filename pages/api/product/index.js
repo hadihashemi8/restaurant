@@ -1,117 +1,105 @@
 import db from "../../../utils/db"
 import Product from "../../../models/product";
-import formidable from "formidable"
-import nextConnect from 'next-connect';
-import multer from "multer"
+import { IncomingForm } from "formidable"
+// import { mv } from "mv"
 
-
-export const config = {
-    api: {
-        bodyParser: false,
-
-    },
-};
-
-const upload = multer({
-    storage: multer.diskStorage({
-        destination: './public/uploads',
-        filename: (req, file, cb) => cb(null, file.originalname),
-    }),
-});
-
-
-
-
+var mv = require('mv');
 
 export default async function handler(req, res) {
-    await db.connect()
+  await db.connect()
 
 
-    const { offset } = req.query
+  const { offset } = req.query
 
-    
-    
-    if (req.method == "POST") {
 
-        const form = formidable({ multiples: false });
 
-        const formData = new Promise((resolve, reject) => {
-            form.parse(req, async (err, fields, files) => {
-                if (err) {
-                    reject("error");
-                }
-                resolve({ fields, files });
-            });
-        });
+  if (req.method == "POST") {
 
-        const { fields, files } = await formData;
-        console.log(files);
+
+
+    const data = await new Promise((resolve, reject) => {
+      const form = new IncomingForm()
+      form.parse(req, (err, fields, files) => {
+        if (err) return reject(err)
+
+        var oldPath = files.file[0].filepath;
+        var newPath = `./public/uploads/${files.file[0].originalFilename}`;
+
+
 
         if (files.file[0].mimetype == "image/png" || files.file[0].mimetype == "image/jpeg" || files.file[0].mimetype == "image/jpg") {
 
-            const newObj = {
-                name: fields.name[0],
-                price: fields.price[0],
-                aboutProduct: fields.aboutProduct[0],
-                aboutProductFull: fields.aboutProductFull[0],
-                categories: fields.categories[0],
-                image: files.file[0].filepath,
-                comments: [],
-                offerPresent: 0,
-                ourOffer: false
+          mv(oldPath, newPath, function (err) {
+            err && console.log(err);
+          });
 
-            }
+          const newObj = {
+            name: fields.name[0],
+            price: fields.price[0],
+            aboutProduct: fields.aboutProduct[0],
+            aboutProductFull: fields.aboutProductFull[0],
+            categories: fields.categories[0],
+            image: `/uploads/${files.file[0].originalFilename}`,
+            comments: [],
+            offerPresent: 0,
+            ourOffer: false
 
+          }
 
-            Product.create(newObj)
-                .then(data => {
-                    console.log(data);
-                    if (data) {
-                        res.status(201).json({ msg: "product added to db" })
-                    }
-                })
+          resolve(newObj)
+
         } else {
 
-            res.status(400).json({ msg: "this format not valid" })
+          res.status(400).json({ msg: "this format not valid" })
         }
 
+      })
+    }).then(response => {
+      console.log(response);
+      if (response) {
+        Product.create(response)
+          .then(data => {
+          
+            if (data) {
+              res.status(201).json({ msg: "product added to db" })
+            }
+          })
+      }
+    })
+
+  } else if (req.method == "GET") {
+
+    await Product.find()
+      .then(products => {
+
+        if (products) {
+
+          if (offset) {
+
+            const endSlice = offset
+            const startSlice = endSlice - 10
 
 
-    } else if (req.method == "GET") {
 
-        await Product.find()
-            .then(products => {
-               
-                if (products) {
+            const sliceProducts = products.slice(startSlice, endSlice)
 
-                    if (offset) {
+            res.status(201).json({ status: true, data: sliceProducts })
+          } else {
+            res.status(201).json({ status: true, data: products })
+          }
 
-                        const endSlice = offset
-                        const startSlice = endSlice - 10
-
+        }
+      }).catch(err => console.log(err))
 
 
-                        const sliceProducts = products.slice(startSlice, endSlice)
-
-                        res.status(201).json({ status: true, data: sliceProducts })
-                    } else {
-                        res.status(201).json({ status: true, data: products })
-                    }
-
-                }
-            }).catch(err => console.log(err))
-
-        // else {
-
-        //     await Product.find()
-        //         .then(products => {
-        //             if (products) {
-        //                 res.status(201).json({ status: true, data: products })
-
-        //             }
-        //         }).catch(err => res.status(404).join({ err }))
-        // }
-    }
+  }
 }
 
 
+
+export const config = {
+  api: {
+    bodyParser: false,
+
+  },
+};

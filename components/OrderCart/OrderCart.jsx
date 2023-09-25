@@ -36,7 +36,7 @@ const OrderCart = (props) => {
 
             <div className='flex items-center justify-between'>
 
-                <Image src="/images/foods/food-1.jpg" width={50} height={50} alt="product-img" />
+                <Image src={props.image} width={50} height={50} alt="product-img" />
 
                 <div className="flex flex-col items-start justify-between mr-2">
                     <ListItemText className="text-sm" primary={props.title} />

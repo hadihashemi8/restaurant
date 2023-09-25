@@ -95,7 +95,7 @@ export default function ProductDetailsModal({ infos, offerCard , setDetailsModal
 
             <div className='col-span1  lg:p-5  flex items-center justify-center h-80 '>
                 <div className='relative w-full h-full rounded-xl overflow-hidden'>
-                    <Image src="/images/foods/food-1.jpg" fill sizes='100%' style={{ objectFit: "cover" }} alt="product-img" />
+                    <Image src={infos?.image} fill sizes='100%' style={{ objectFit: "cover" }} alt="product-img" />
                 </div>
             </div>
 

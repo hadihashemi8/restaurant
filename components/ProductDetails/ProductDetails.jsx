@@ -12,7 +12,7 @@ const ProductDetails = ({ productInfo }) => {
 
                 <div className='w-full lg:w-1/2 h-48 flex items-center justify-center'>
                 <div className='relative w-2/3 h-44 rounded-xl overflow-hidden'>
-                    <Image src="/images/foods/food-1.jpg" fill sizes='100%' style={{ objectFit: "cover" }} alt="product-img" />
+                    <Image src={productInfo.image} fill sizes='100%' style={{ objectFit: "cover" }} alt="product-img" />
                 </div>
                 </div>
 
@@ -21,7 +21,7 @@ const ProductDetails = ({ productInfo }) => {
                         <p className='mt-2'>{productInfo.name}</p>
                         <p className='mt-2'> قیمت : {productInfo.price}</p>
                         <p className='mt-2'> دسته بندی : {productInfo.categories}</p>
-                        <p className='mt-2 h-20 overflow-y-scroll'> {productInfo.aboutProductFull}</p>
+                        <p className='mt-2 h-20 overflow-y-scroll w-full'> {productInfo.aboutProductFull}</p>
                     </div>
                 </div>
 

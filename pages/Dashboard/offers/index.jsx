@@ -197,8 +197,8 @@ export default function Offers() {
 
                             <TableCell   >
                               <div className='w-16 h-16 relative mx-auto'>
-                                {/* <Image alt="p-img" src={`/${row.image}`} fill sizes='100%' styles={{ objectFit: "cover" }} /> */}
-                                <Image alt="p-img" src="/images/foods/food-1.jpg" fill sizes='100%' styles={{ objectFit: "cover" }} />
+                                <Image alt="p-img" src={`${row.image}`} fill sizes='100%' styles={{ objectFit: "cover" }} />
+                                
                                 
                               </div>
                             </TableCell>

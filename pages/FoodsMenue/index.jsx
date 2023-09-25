@@ -305,7 +305,7 @@ export default function FoodsMenue() {
                                         <div className='col-span-3 flex flex-col items-center '>
                                         <Image src="/images/not-found-search.jpg" width={400} height={400} alt="not found"/>
                                             <p className='text-lg mt-4'>
-                                                محصول مورد نظر موجود ندارد
+                                                محصول مورد نظر وجود ندارد
                                             </p>
                                         </div>
                                     )}

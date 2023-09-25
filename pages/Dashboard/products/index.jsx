@@ -257,8 +257,8 @@ export default function Products() {
                           <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                             <TableCell  >
                               <div className='w-16 h-16 relative mx-auto'>
-                                <Image alt="p-img" src="/images/foods/food-1.jpg" fill sizes='100%' styles={{ objectFit: "cover" }} />
-                                {/* <img src={row.image} /> */}
+                                <Image alt="p-img" src={`${row.image}`} fill sizes='100%' styles={{ objectFit: "cover" }} />
+                                {/* <img src={`${row.image}`} /> */}
                               </div>
                             </TableCell>
                             <TableCell align='center'>
