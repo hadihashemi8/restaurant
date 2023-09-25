@@ -173,7 +173,8 @@ export default function FoodsMenue() {
 
     useEffect(() => {
         dispatch(filterProducts({ filterOptionChips, items }))
-    }, [items])
+        console.log('ok');
+    }, [items , dispatch , filterOptionChips])
 
 
     const filterHandler = () => {

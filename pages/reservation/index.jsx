@@ -15,7 +15,7 @@ const index = () => {
 
                     
                         
-                    <img className='md:w-2/3' src='/images/Under-Construction.jpg'/>
+                    <Image  src='/images/Under-Construction.jpg' width={700} height={700} quality={95} alt="Under-Construction"/>
 
                     <h3 className='lg:text-3xl mt-4'>این صفحه در دسترس نمیباشد</h3>
 

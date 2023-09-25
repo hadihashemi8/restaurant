@@ -97,7 +97,7 @@ export default function SignUp(props) {
             router.push("/")
         }
 
-    }, [session, status])
+    }, [session, status , router])
 
 
 

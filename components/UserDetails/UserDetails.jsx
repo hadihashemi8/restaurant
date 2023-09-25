@@ -23,8 +23,8 @@ export default function UserDetails({ userInfo, transAction }) {
     ])
 
 
-    
-    
+
+
 
     useEffect(() => {
         const result = columns.some(item => item.id == "total-transaction")
@@ -37,7 +37,7 @@ export default function UserDetails({ userInfo, transAction }) {
                 format: (value) => value.toLocaleString('en-US'),
             },])
         }
-    }, [])
+    }, [columns , transAction])
 
 
     return (
@@ -83,11 +83,11 @@ export default function UserDetails({ userInfo, transAction }) {
                                     {transAction && (
                                         <TableCell align='center'>
                                             {userInfo.orders.length == 0 ? 0 : userInfo?.orders.reduce((acc, cur) => {
-                                            if (cur.details.status) {
-                                                return acc + cur.details?.total
-                                            }
-                                            return acc
-                                        } , 0)} تومان
+                                                if (cur.details.status) {
+                                                    return acc + cur.details?.total
+                                                }
+                                                return acc
+                                            }, 0)} تومان
                                         </TableCell>
                                     )}
 
@@ -170,7 +170,7 @@ export default function UserDetails({ userInfo, transAction }) {
                                                 return acc + cur.details?.total
                                             }
                                             return acc
-                                        } , 0)} تومان
+                                        }, 0)} تومان
                                     </TableCell>
                                 )}
 

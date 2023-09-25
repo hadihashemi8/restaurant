@@ -27,7 +27,7 @@ const OrderCart = (props) => {
 
     useEffect(() => {
         dispatch(updateQty({ id: props.id, qty }))
-    }, [qty])
+    }, [qty , dispatch , props.id])
 
 
     return (

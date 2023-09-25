@@ -208,7 +208,8 @@ export default function Users() {
             // },
         ])
         }
-    }, [session])
+        console.log('ok');
+    }, [session , columns])
 
 
 

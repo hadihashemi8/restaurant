@@ -23,7 +23,7 @@ export default function OrderSection() {
                         </div>
                         
                         <div className='group cursor-pointer m-2 w-full sm:w-1/2 h-full relative '>
-                            <Image src="/images/order-section-img2.jpg" fill loading='lazy' sizes='100%' style={{ objectFit: "cover" }} />
+                            <Image src="/images/order-section-img2.jpg" fill loading='lazy' sizes='100%' style={{ objectFit: "cover" }} alt='order-section-bg'/>
                             <div className='bg-[rgba(0,0,0,0.5)] hover:bg-[rgba(0,0,0,0.4)] duration-300 flex items-center justify-center w-full h-full absolute top-0 left-0'>
                                 
                                 <Button title="رزرو میز" to="/reservation" />

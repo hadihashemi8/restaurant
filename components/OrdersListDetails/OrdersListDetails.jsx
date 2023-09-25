@@ -37,7 +37,7 @@ const OrdersListDetails = ({ userInfo }) => {
                                     <TableBody className=" w-full">
 
                                         {userInfo.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).reverse().map(item => (
-                                            <TableRow className=" w-full ">
+                                            <TableRow key={item.id} className=" w-full ">
                                                 <TableCell>
 
                                                     <Accordion className='w-full'>
@@ -74,7 +74,7 @@ const OrdersListDetails = ({ userInfo }) => {
 
                                                             </div>
                                                             {item.order.map(order => (
-                                                                <div className=' flex flex-col  items-start lg:flex-row lg:items-center justify-start mt-2 flex-1 bg-gray-200 rounded-lg p-2 '>
+                                                                <div key={order.id} className=' flex flex-col  items-start lg:flex-row lg:items-center justify-start mt-2 flex-1 bg-gray-200 rounded-lg p-2 '>
                                                                     <p className='lg:ml-4 mt-2 lg:mt-0 w-24  text-start'>{order.title}</p>
 
                                                                     <p className={`lg:ml-4 w-24 text-start mt-2 lg:mt-0 ${order.offerPresent > 0 && "line-through"}`}>{order.price * order.qty} تومان</p>

@@ -38,7 +38,7 @@ export default function Layout({ children }) {
             router.push('?Cart=open')
         }
         console.log(selector);
-    }, [selector])
+    }, [selector , router])
 
 
     return (

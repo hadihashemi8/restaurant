@@ -133,7 +133,7 @@ export default function ProductDetailsModal({ infos, offerCard , setDetailsModal
 
                             {infos?.comments.map(item => {
                                 if (item.published) {
-                                    return <div className='flex items-stretch justify-between mt-1 w-full bg-main-color4 p-2'>
+                                    return <div key={item.id} className='flex items-stretch justify-between mt-1 w-full bg-main-color4 p-2'>
                                         <Avatar className='w-16 h-16' />
                                         <div className='flex flex-col items-start justify-start   flex-1 pr-2'>
                                             <p className='text-[10px] '>{item?.userName}</p>
